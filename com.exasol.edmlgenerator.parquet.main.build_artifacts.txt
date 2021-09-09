@@ -1,0 +1,3 @@
+[EXECUTABLE]
+com.exasol.edmlgenerator.parquet.main
+
