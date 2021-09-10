@@ -15,18 +15,18 @@ class ToUpperSnakeCaseConverter {
      * @return string formatted in UPPER_SNAKE_CASE
      */
     static String toUpperSnakeCase(final String inputString) {
-        boolean wasPreviousUpperOrUnderscore = false;
+        boolean isPreviousUpperOrUnderscore = false;
         boolean isFirst = true;
         final StringBuilder result = new StringBuilder();
         for (int index = 0; index < inputString.length(); index++) {
             final char currentChar = inputString.charAt(index);
             if (Character.isUpperCase(currentChar)) {
-                if (!wasPreviousUpperOrUnderscore && !isFirst) {
+                if (!isPreviousUpperOrUnderscore && !isFirst) {
                     result.append("_");
                 }
-                wasPreviousUpperOrUnderscore = true;
+                isPreviousUpperOrUnderscore = true;
             } else {
-                wasPreviousUpperOrUnderscore = currentChar == '_';
+                isPreviousUpperOrUnderscore = currentChar == '_';
             }
             result.append(Character.toUpperCase(currentChar));
             isFirst = false;
