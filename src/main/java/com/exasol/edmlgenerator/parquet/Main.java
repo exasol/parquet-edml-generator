@@ -12,7 +12,7 @@ import picocli.CommandLine;
 /**
  * This class is the entrypoint for the CLI client.
  */
-@CommandLine.Command(name = "parquet-edml-generator", versionProvider = Main.VersionProvider.class, mixinStandardHelpOptions = true, description = "This tool builds EDML mapping definitions for given parquet files.")
+@CommandLine.Command(name = "parquet-edml-generator", versionProvider = Main.VersionProvider.class, mixinStandardHelpOptions = true, description = "This tool builds EDML mapping definitions for a given parquet file.")
 public class Main implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "Parquet file to build a mapping for.")
     private Path parquetFile;
