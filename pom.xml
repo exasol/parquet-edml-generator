@@ -44,9 +44,9 @@
         </repository>
     </distributionManagement>
     <scm>
-        <connection>scm:git:https://github.com/exasol/virtual-schema-common-document.git</connection>
-        <developerConnection>scm:git:https://github.com/exasol/virtual-schema-common-document.git</developerConnection>
-        <url>https://github.com/exasol/virtual-schema-common-document/tree/master</url>
+        <connection>scm:git:https://github.com/exasol/parquet-edml-generator.git</connection>
+        <developerConnection>scm:git:https://github.com/exasol/parquet-edml-generator.git</developerConnection>
+        <url>https://github.com/exasol/parquet-edml-generator/tree/master</url>
     </scm>
     <repositories>
         <repository>

@@ -15,10 +15,24 @@ import com.exasol.errorreporting.ExaError;
 class ParquetColumnToMappingDefinitionConverter {
     private static final int INT_32_DIGITS = getNumberOfDigitsForInt(32);
     private static final int INT_64_DIGITS = getNumberOfDigitsForInt(64);
-    private static final int INT_96_DIGITS = getNumberOfDigitsForInt(96);
+    private static final int MAX_VARCHAR_COLUMN_SIZE = 2_000_000;
 
     private static int getNumberOfDigitsForInt(final int numberOfBits) {
         return (int) Math.ceil(Math.log10(Math.pow(2, numberOfBits)));
+    }
+
+    private static String buildColumnName(final Type column) {
+        return toUpperSnakeCase(column.getName());
+    }
+
+    private static UnsupportedOperationException getUnsupportedTypeException(final String typeName,
+            final String columnName) {
+        return new UnsupportedOperationException(ExaError.messageBuilder("E-PEG-2")
+                .message("Unsupported parquet type {{type}} for column {{column name}}.", typeName, columnName)
+                .mitigation("Update your parquet files to use a different type.")
+                .mitigation(
+                        "Create a ticket at https://github.com/exasol/virtual-schema-common-document/issues to support this type.")
+                .toString());
     }
 
     /**
@@ -28,20 +42,27 @@ class ParquetColumnToMappingDefinitionConverter {
      * @return generated mapping definition
      */
     MappingDefinition convert(final Type column) {
-        final ConvertVisitor visitor = new ConvertVisitor();
-        column.accept(visitor);
-        return visitor.getResult();
+        final LogicalTypeAnnotation logicalTypeAnnotation = column.getLogicalTypeAnnotation();
+        if (logicalTypeAnnotation != null) {
+            final LogicalTypeConvertVisitor visitor = new LogicalTypeConvertVisitor(buildColumnName(column));
+            logicalTypeAnnotation.accept(visitor);
+            return visitor.getResult();
+        } else {
+            final NonLogicalTypeConvertVisitor visitor = new NonLogicalTypeConvertVisitor();
+            column.accept(visitor);
+            return visitor.getResult();
+        }
     }
 
-    private static class ConvertVisitor
-            implements TypeVisitor, LogicalTypeAnnotation.LogicalTypeAnnotationVisitor<Void> {
+    private static class NonLogicalTypeConvertVisitor implements TypeVisitor {
         private MappingDefinition result;
 
         @Override
         public void visit(final GroupType groupType) {
+            groupType.getLogicalTypeAnnotation();
             final Fields.FieldsBuilder fieldsBuilder = Fields.builder();
             for (final Type column : groupType.getFields()) {
-                final ConvertVisitor visitor = new ConvertVisitor();
+                final NonLogicalTypeConvertVisitor visitor = new NonLogicalTypeConvertVisitor();
                 column.accept(visitor);
                 fieldsBuilder.mapField(column.getName(), visitor.getResult());
             }
@@ -56,14 +77,7 @@ class ParquetColumnToMappingDefinitionConverter {
 
         @Override
         public void visit(final PrimitiveType primitiveType) {
-            final LogicalTypeAnnotation logicalTypeAnnotation = primitiveType.getLogicalTypeAnnotation();
-            if (logicalTypeAnnotation != null) {
-                final LogicalTypeConvertVisitor visitor = new LogicalTypeConvertVisitor(buildColumnName(primitiveType));
-                logicalTypeAnnotation.accept(visitor);
-                this.result = visitor.getResult();
-            } else {
-                this.result = buildMappingForPrimitiveType(primitiveType);
-            }
+            this.result = buildMappingForPrimitiveType(primitiveType);
         }
 
         private MappingDefinition buildMappingForPrimitiveType(final PrimitiveType primitiveType) {
@@ -74,22 +88,27 @@ class ParquetColumnToMappingDefinitionConverter {
             case INT64:
                 return buildToDecimalMapping(primitiveType, INT_64_DIGITS);
             case INT96:
-                return buildToDecimalMapping(primitiveType, INT_96_DIGITS);
+                return ToTimestampMapping.builder().destinationName(buildColumnName(primitiveType)).build();
+            case BOOLEAN:
+                return ToBoolMapping.builder().destinationName(buildColumnName(primitiveType)).build();
+            case BINARY:
+                return ToVarcharMapping.builder().destinationName(buildColumnName(primitiveType))
+                        .varcharColumnSize(MAX_VARCHAR_COLUMN_SIZE).build();
+            case FIXED_LEN_BYTE_ARRAY:
+                return ToVarcharMapping.builder().destinationName(buildColumnName(primitiveType))
+                        .varcharColumnSize(primitiveType.getTypeLength()).build();
+            case FLOAT:
+            case DOUBLE:
+                return ToDoubleMapping.builder().destinationName(buildColumnName(primitiveType)).build();
             default:
-                throw new UnsupportedOperationException(ExaError.messageBuilder("F-PEG-2")
-                        .message("Unsupported parquet type  {{type}} for column {{name}}.", primitiveTypeName,
-                                primitiveType.getName())
-                        .ticketMitigation().toString());
+                throw getUnsupportedTypeException(primitiveTypeName + "-primitive-type",
+                        buildColumnName(primitiveType));
             }
         }
 
         private ToDecimalMapping buildToDecimalMapping(final PrimitiveType primitiveType, final int precision) {
             return ToDecimalMapping.builder().decimalPrecision(precision).decimalScale(0)
                     .destinationName(buildColumnName(primitiveType)).build();
-        }
-
-        private String buildColumnName(final Type column) {
-            return toUpperSnakeCase(column.getName().toUpperCase());
         }
 
         /**
@@ -102,6 +121,9 @@ class ParquetColumnToMappingDefinitionConverter {
         }
     }
 
+    /**
+     * Converter for parquet logical types. See: https://github.com/apache/parquet-format/blob/master/LogicalTypes.md
+     */
     private static class LogicalTypeConvertVisitor implements LogicalTypeAnnotation.LogicalTypeAnnotationVisitor<Void> {
         private final String columnName;
         private MappingDefinition result;
@@ -128,43 +150,50 @@ class ParquetColumnToMappingDefinitionConverter {
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.StringLogicalTypeAnnotation stringLogicalType) {
-            throw getUnsupportedException(stringLogicalType);
-        }
-
-        private UnsupportedOperationException getUnsupportedException(final LogicalTypeAnnotation type) {
-            return new UnsupportedOperationException(ExaError.messageBuilder("F-PEG-3")
-                    .message("Unsupported logical parquet type {{type}} for column {{name}}.", type, this.columnName)
-                    .ticketMitigation().toString());
+            this.result = ToVarcharMapping.builder().destinationName(this.columnName)
+                    .varcharColumnSize(MAX_VARCHAR_COLUMN_SIZE).build();
+            return Optional.empty();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.MapLogicalTypeAnnotation mapLogicalType) {
-            throw getUnsupportedException(mapLogicalType);
+            this.result = getToJsonMapping();
+            return Optional.empty();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.ListLogicalTypeAnnotation listLogicalType) {
-            throw getUnsupportedException(listLogicalType);
+            this.result = getToJsonMapping();
+            return Optional.empty();
+        }
+
+        private ToJsonMapping getToJsonMapping() {
+            return ToJsonMapping.builder().destinationName(this.columnName).varcharColumnSize(MAX_VARCHAR_COLUMN_SIZE)
+                    .build();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.EnumLogicalTypeAnnotation enumLogicalType) {
-            throw getUnsupportedException(enumLogicalType);
+            throw getUnsupportedTypeException("enum-logical-type", this.columnName);
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.DateLogicalTypeAnnotation dateLogicalType) {
-            throw getUnsupportedException(dateLogicalType);
+            this.result = ToDateMapping.builder().destinationName(this.columnName).build();
+            return Optional.empty();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.TimeLogicalTypeAnnotation timeLogicalType) {
-            throw getUnsupportedException(timeLogicalType);
+            this.result = ToDecimalMapping.builder().decimalPrecision(INT_64_DIGITS).decimalScale(0)
+                    .destinationName(this.columnName).build();
+            return Optional.empty();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.TimestampLogicalTypeAnnotation timestampLogicalType) {
-            throw getUnsupportedException(timestampLogicalType);
+            this.result = ToTimestampMapping.builder().destinationName(this.columnName).build();
+            return Optional.empty();
         }
 
         @Override
@@ -177,27 +206,29 @@ class ParquetColumnToMappingDefinitionConverter {
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.JsonLogicalTypeAnnotation jsonLogicalType) {
-            throw getUnsupportedException(jsonLogicalType);
+            this.result = ToVarcharMapping.builder().destinationName(this.columnName)
+                    .varcharColumnSize(MAX_VARCHAR_COLUMN_SIZE).build();
+            return Optional.empty();
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.BsonLogicalTypeAnnotation bsonLogicalType) {
-            throw getUnsupportedException(bsonLogicalType);
+            throw getUnsupportedTypeException("bson-logical-type", this.columnName);
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.UUIDLogicalTypeAnnotation uuidLogicalType) {
-            throw getUnsupportedException(uuidLogicalType);
+            throw getUnsupportedTypeException("uuid-logical-type", this.columnName);
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.IntervalLogicalTypeAnnotation intervalLogicalType) {
-            throw getUnsupportedException(intervalLogicalType);
+            throw getUnsupportedTypeException("interval-logical-type", this.columnName);
         }
 
         @Override
         public Optional<Void> visit(final LogicalTypeAnnotation.MapKeyValueTypeAnnotation mapKeyValueLogicalType) {
-            throw getUnsupportedException(mapKeyValueLogicalType);
+            throw getUnsupportedTypeException("map-key-value-logical-type", this.columnName);
         }
     }
 }
