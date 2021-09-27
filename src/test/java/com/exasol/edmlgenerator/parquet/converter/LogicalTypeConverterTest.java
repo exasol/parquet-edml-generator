@@ -53,7 +53,6 @@ class LogicalTypeConverterTest {
     void testConvertList() {
         final Type itemType = Types.primitive(INT32, REQUIRED).named("element");
         final GroupType listType = Types.list(REQUIRED).element(itemType).named("ids");
-        System.out.println(listType.toString());
         assertConvertsToJsonMapping(listType);
     }
 
@@ -62,7 +61,6 @@ class LogicalTypeConverterTest {
         final Type keyType = Types.primitive(BINARY, REQUIRED).as(LogicalTypeAnnotation.stringType()).named("key");
         final Type valueType = Types.primitive(INT32, REQUIRED).named("value");
         final GroupType listType = Types.map(REQUIRED).key(keyType).value(valueType).named("scores");
-        System.out.println(listType.toString());
         assertConvertsToJsonMapping(listType);
     }
 
@@ -71,7 +69,6 @@ class LogicalTypeConverterTest {
         final Type keyType = Types.primitive(BINARY, REQUIRED).as(LogicalTypeAnnotation.stringType()).named("key");
         final Type valueType = Types.primitive(INT32, REQUIRED).named("value");
         final GroupType listType = Types.map(REQUIRED).key(keyType).value(valueType).named("scores");
-        System.out.println(listType.toString());
         assertConvertsToJsonMapping(listType);
     }
 
