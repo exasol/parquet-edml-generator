@@ -11,6 +11,7 @@ import org.apache.parquet.schema.MessageType;
 import com.exasol.adapter.document.documentfetcher.files.parquet.SeekableInputStreamAdapter;
 import com.exasol.adapter.document.documentfetcher.files.randomaccessinputstream.FileRandomAccessInputStream;
 import com.exasol.adapter.document.edml.EdmlDefinition;
+import com.exasol.edmlgenerator.parquet.converter.ParquetColumnToMappingDefinitionConverter;
 import com.exasol.errorreporting.ExaError;
 
 /**

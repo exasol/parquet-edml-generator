@@ -1,10 +1,11 @@
-# Parquet EDML Generator 1.0.0, released 2021-??-??
+# Parquet EDML Generator 1.0.0, released 2021-09-27
 
 Code name: Initial Implementation
 
 ## Features
 
 * #1: Initial Implementation
+* #4: Added support for more types
 
 ## Dependency Updates
 
