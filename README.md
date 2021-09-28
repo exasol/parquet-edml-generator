@@ -19,7 +19,7 @@ This is a tool that generates EDML definitions for Parquet files.
 ## Usage
 
 ```shell
-java -cp parquet-edml-generator.jar com.exasol.edmlgenerator.parquet.Main <parquet file> 
+java -jar parquet-edml-generator.jar <parquet file>
 ```
 
 ## Additional Information
