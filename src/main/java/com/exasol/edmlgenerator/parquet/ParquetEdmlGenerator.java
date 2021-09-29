@@ -18,7 +18,7 @@ import com.exasol.errorreporting.ExaError;
  * This class generates EDML mapping definitions for parquet files.
  */
 public class ParquetEdmlGenerator {
-    private static final String EDML_SCHEMA = "https://schemas.exasol.com/edml-1.2.1.json";
+    private static final String EDML_SCHEMA = "https://schemas.exasol.com/edml-1.3.0.json";
 
     /**
      * Generate an EDML mapping definition for a parquet file.

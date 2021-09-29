@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator</url>
