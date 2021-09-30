@@ -34,7 +34,7 @@ class MainTest {
     }
 
     @Test
-    void testGetVersion(final Capturable stream) throws IOException {
+    void testGetVersion(final Capturable stream) {
         stream.capture();
         assertExit(() -> Main.main("-V"));
         assertThat(stream.getCapturedData().trim(), equalTo(MavenProjectVersionGetter.getCurrentProjectVersion()));

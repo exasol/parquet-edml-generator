@@ -4,6 +4,7 @@ import static org.apache.parquet.schema.PrimitiveType.PrimitiveTypeName.*;
 import static org.apache.parquet.schema.Type.Repetition.REQUIRED;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.apache.parquet.schema.*;
@@ -88,5 +89,14 @@ class ParquetColumnToMappingDefinitionConverterTest {
         final Type logicalStringType = Types.primitive(BINARY, REQUIRED).as(LogicalTypeAnnotation.stringType())
                 .named("value");
         assertConvertsToToVarcharMapping(logicalStringType, "VALUE", 2_000_000);
+    }
+
+    @Test
+    void testConvertNestedList() {
+        final Type itemType = Types.primitive(INT32, REQUIRED).named("element");
+        final GroupType listType = Types.list(REQUIRED).element(itemType).named("ids");
+        final MessageType schema = new MessageType("test", listType);
+        final Fields result = (Fields) new ParquetColumnToMappingDefinitionConverter().convert(schema);
+        assertThat(result.getFields().get("ids"), instanceOf(ToJsonMapping.class));
     }
 }
