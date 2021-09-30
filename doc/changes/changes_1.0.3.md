@@ -1,6 +1,6 @@
 # Parquet EDML Generator 1.0.3, released 2021-09-30
 
-Code name:
+Code name: Fix EDML generator for list type columns
 
 ## Summary
 
