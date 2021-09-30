@@ -42,9 +42,8 @@ public class ParquetColumnToMappingDefinitionConverter {
             groupType.getLogicalTypeAnnotation();
             final Fields.FieldsBuilder fieldsBuilder = Fields.builder();
             for (final Type column : groupType.getFields()) {
-                final NonLogicalTypeConvertVisitor visitor = new NonLogicalTypeConvertVisitor();
-                column.accept(visitor);
-                fieldsBuilder.mapField(column.getName(), visitor.getResult());
+                final MappingDefinition columnMapping = new ParquetColumnToMappingDefinitionConverter().convert(column);
+                fieldsBuilder.mapField(column.getName(), columnMapping);
             }
             this.result = fieldsBuilder.build();
         }
