@@ -16,7 +16,7 @@
         <jacoco.version>0.8.7</jacoco.version>
         <vscommon.version>15.2.0</vscommon.version>
         <gpg.skip>true</gpg.skip>
-        <surefire.and.failsafe.plugin.version>3.0.0-M4</surefire.and.failsafe.plugin.version>
+        <surefire.and.failsafe.plugin.version>3.0.0-M5</surefire.and.failsafe.plugin.version>
     </properties>
     <licenses>
         <license>
