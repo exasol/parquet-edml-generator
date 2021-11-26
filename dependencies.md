@@ -3,15 +3,15 @@
 
 ## Compile Dependencies
 
-| Dependency                                          | License                                       |
-| --------------------------------------------------- | --------------------------------------------- |
-| [error-reporting-java][0]                           | [MIT][1]                                      |
-| [Apache Parquet Hadoop][2]                          | [The Apache Software License, Version 2.0][3] |
-| [Virtual Schema for document data in files][4]      | [MIT][1]                                      |
-| [picocli - a mighty tiny Command Line Interface][6] | [The Apache Software License, version 2.0][3] |
-| [maven-project-version-getter][8]                   | [MIT][1]                                      |
-| [JUnit5 System Extensions][10]                      | [Eclipse Public License v2.0][11]             |
-| [Apache Commons Compress][12]                       | [Apache License, Version 2.0][13]             |
+| Dependency                                     | License                                       |
+| ---------------------------------------------- | --------------------------------------------- |
+| [error-reporting-java][0]                      | [MIT][1]                                      |
+| [Apache Parquet Hadoop][2]                     | [The Apache Software License, Version 2.0][3] |
+| [Virtual Schema for document data in files][4] | [MIT][1]                                      |
+| [picocli][6]                                   | [The Apache Software License, version 2.0][3] |
+| [Maven Project Version Getter][8]              | [MIT][1]                                      |
+| [JUnit5 System Extensions][10]                 | [Eclipse Public License v2.0][11]             |
+| [Apache Commons Compress][12]                  | [Apache License, Version 2.0][13]             |
 
 ## Test Dependencies
 
