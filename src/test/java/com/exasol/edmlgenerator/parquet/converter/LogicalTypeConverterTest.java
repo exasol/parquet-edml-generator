@@ -60,8 +60,8 @@ class LogicalTypeConverterTest {
     void testConvertMap() {
         final Type keyType = Types.primitive(BINARY, REQUIRED).as(LogicalTypeAnnotation.stringType()).named("key");
         final Type valueType = Types.primitive(INT32, REQUIRED).named("value");
-        final GroupType listType = Types.map(REQUIRED).key(keyType).value(valueType).named("scores");
-        assertConvertsToJsonMapping(listType);
+        final GroupType mapType = Types.map(REQUIRED).key(keyType).value(valueType).named("scores");
+        assertConvertsToJsonMapping(mapType);
     }
 
     @Test

@@ -1,0 +1,4 @@
+error-tags:
+  PEG:
+    packages:
+      - com.exasol.edmlgenerator.parquet
