@@ -22,6 +22,7 @@ In this release we updated dependencies and by that fixed the transitive CVE-202
 
 ### Test Dependency Updates
 
+* Added `org.junit.jupiter:junit-jupiter-api:5.8.1`
 * Updated `org.junit.jupiter:junit-jupiter-engine:5.7.2` to `5.8.1`
 * Updated `org.junit.jupiter:junit-jupiter-params:5.7.2` to `5.8.1`
 * Updated `org.mockito:mockito-junit-jupiter:3.11.2` to `4.1.0`
@@ -30,3 +31,5 @@ In this release we updated dependencies and by that fixed the transitive CVE-202
 
 * Updated `com.exasol:error-code-crawler-maven-plugin:0.1.1` to `0.6.0`
 * Updated `com.exasol:project-keeper-maven-plugin:1.1.0` to `1.3.2`
+* Updated `org.apache.maven.plugins:maven-failsafe-plugin:3.0.0-M3` to `3.0.0-M5`
+* Updated `org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M3` to `3.0.0-M5`
