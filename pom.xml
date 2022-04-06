@@ -85,7 +85,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>virtual-schema-common-document-files</artifactId>
-            <version>6.0.1</version>
+            <version>6.0.2</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -164,6 +164,50 @@
                             <mainClass>com.exasol.edmlgenerator.parquet.Main</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>info.picocli</groupId>
+                            <artifactId>picocli-codegen</artifactId>
+                            <version>4.6.3</version>
+                        </path>
+                    </annotationProcessorPaths>
+                    <compilerArgs>
+                        <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
+                <version>21.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>native-image</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>false</skip>
+                    <imageName>${project.artifactId}</imageName>
+                    <buildArgs>
+                        --no-fallback -H:ReflectionConfigurationFiles=${project.basedir}/reflect-config.json
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <forkCount>0</forkCount>
+                    <excludedGroups>${test.excludeTags}</excludedGroups>
                 </configuration>
             </plugin>
         </plugins>
