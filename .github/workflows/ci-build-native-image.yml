@@ -9,8 +9,12 @@ jobs:
     name: Build native-image on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ macos-latest, windows-latest, ubuntu-latest ]
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.os }}-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
