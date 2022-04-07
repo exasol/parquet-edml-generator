@@ -10,11 +10,14 @@ Code name: Added native images
 
 ### Compile Dependency Updates
 
+* Added `com.exasol:edml-java:1.0.0`
 * Updated `com.exasol:error-reporting-java:0.4.0` to `0.4.1`
 * Updated `com.exasol:maven-project-version-getter:0.1.0` to `1.1.0`
-* Updated `com.exasol:virtual-schema-common-document-files:2.2.0` to `6.0.2`
+* Removed `com.exasol:virtual-schema-common-document-files:2.2.0`
 * Updated `info.picocli:picocli:4.6.1` to `4.6.3`
+* Added `org.apache.hadoop:hadoop-client:3.3.1`
 * Updated `org.apache.parquet:parquet-hadoop:1.12.0` to `1.12.2`
+* Added `org.slf4j:slf4j-jdk14:1.7.36`
 
 ### Test Dependency Updates
 

@@ -8,8 +8,6 @@ import java.nio.file.Path;
 import org.apache.parquet.hadoop.ParquetFileReader;
 import org.apache.parquet.schema.MessageType;
 
-import com.exasol.adapter.document.documentfetcher.files.parquet.SeekableInputStreamAdapter;
-import com.exasol.adapter.document.documentfetcher.files.randomaccessinputstream.FileRandomAccessInputStream;
 import com.exasol.adapter.document.edml.EdmlDefinition;
 import com.exasol.edmlgenerator.parquet.converter.ParquetColumnToMappingDefinitionConverter;
 import com.exasol.errorreporting.ExaError;
@@ -44,8 +42,8 @@ public class ParquetEdmlGenerator {
     }
 
     private MessageType getSchema(final Path parquetFile) {
-        try (final FileRandomAccessInputStream inputStream = new FileRandomAccessInputStream(parquetFile.toFile());
-                final var reader = ParquetFileReader.open(SeekableInputStreamAdapter.convert(inputStream))) {
+        try (final LocalInputFile inputFile = new LocalInputFile(parquetFile);
+                final var reader = ParquetFileReader.open(inputFile)) {
             return reader.getFileMetaData().getSchema();
         } catch (final IOException exception) {
             throw new IllegalStateException(ExaError.messageBuilder("E-PEG-1")
