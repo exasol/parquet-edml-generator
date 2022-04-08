@@ -31,7 +31,7 @@
         <profile>
             <id>skipNativeImage</id>
             <properties>
-                <native-image.skip>false</native-image.skip>
+                <native-image.skip>true</native-image.skip>
                 <test.excludeTags>native-image</test.excludeTags>
             </properties>
         </profile>
