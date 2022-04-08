@@ -18,6 +18,24 @@
         <gpg.skip>true</gpg.skip>
         <surefire.and.failsafe.plugin.version>3.0.0-M5</surefire.and.failsafe.plugin.version>
     </properties>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <native-image.skip>false</native-image.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>skipNativeImage</id>
+            <properties>
+                <native-image.skip>false</native-image.skip>
+                <test.excludeTags>native-image</test.excludeTags>
+            </properties>
+        </profile>
+    </profiles>
     <licenses>
         <license>
             <name>MIT</name>
@@ -260,7 +278,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>false</skip>
+                    <skip>${native-image.skip}</skip>
                     <imageName>${project.artifactId}</imageName>
                     <buildArgs>
                         --no-fallback -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json

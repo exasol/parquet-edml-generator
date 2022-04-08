@@ -1,11 +1,11 @@
 # Developers Guide
 
-## Building the native image
+By default, this project builds a native executable. For that you need to install the GraalVM including the native-image tool.
 
-Current try to build a native image:
+* Download and unzip [GraalVM](https://github.com/graalvm/graalvm-ce-builds/releases/tag/vm-22.0.0.2). Pick the latest version with same major and minor than the `native-image-maven-plugin` in the `pom.xml`.
+* Install native image. Run `./bin/gu install native-image` in the unzipped GraalVM dir.
+* Set $JAVAHOME to the graalvm dir.
 
-```shell
- ~/programme/graalvm-ce-java11-21.1.0/bin/native-image --static -cp target/parquet-edml-generator.jar com.exasol.edmlgenerator.parquet.Main --no-fallback
-```
+## Building Without Native Image
 
-See https://picocli.info/#_how_do_i_create_a_native_image_for_my_application
+Building the native image is quite resource expensive (~4GB RAM, 2 min CPU). If you just qant to quickly run the build you can also skip it by adding `-p skipNativeImage` as parameter to `mvn`.
