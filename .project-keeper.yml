@@ -9,4 +9,5 @@ linkReplacements:
   - "http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.txt|http://cecill.info/licences/Licence_CeCILL-C_V1-en.txt"
 excludes:
   - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
+  - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build-next-java.yml'"
 
