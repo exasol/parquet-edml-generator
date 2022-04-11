@@ -15,7 +15,7 @@ public class ParquetTestWriterBuilder extends ParquetWriter.Builder<Group, Parqu
     private final MessageType schema;
 
     public ParquetTestWriterBuilder(final Path destinationFile, final MessageType schema) {
-        super(new org.apache.hadoop.fs.Path(destinationFile.toString()));
+        super(new LocalOutputFile(destinationFile));
         this.schema = schema;
     }
 
