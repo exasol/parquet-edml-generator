@@ -2,32 +2,38 @@ package com.exasol.edmlgenerator.parquet;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.parquet.io.InputFile;
 import org.apache.parquet.io.SeekableInputStream;
 
-class LocalInputFile implements InputFile, AutoCloseable {
-    private static final int COPY_BUFFER_SIZE = 8192;
-    private final RandomAccessFile randomAccessFile;
+import com.exasol.errorreporting.ExaError;
 
-    LocalInputFile(final Path localFile) throws FileNotFoundException {
-        this.randomAccessFile = new RandomAccessFile(localFile.toFile(), "r");
+class LocalInputFile implements InputFile {
+    private static final int COPY_BUFFER_SIZE = 8192;
+    private final long size;
+    private final Path localFile;
+
+    LocalInputFile(final Path localFile) {
+        this.localFile = localFile;
+        try {
+            this.size = Files.size(localFile);
+        } catch (final IOException exception) {
+            throw new UncheckedIOException(
+                    ExaError.messageBuilder("E-PEG-4").message("Failed to get size of parquet file.").toString(),
+                    exception);
+        }
     }
 
     @Override
-    public long getLength() throws IOException {
-        return this.randomAccessFile.length();
+    public long getLength() {
+        return this.size;
     }
 
     @Override
     public SeekableInputStream newStream() {
-        return new LocalFileSeekableInputStream(this.randomAccessFile);
-    }
-
-    @Override
-    public void close() throws IOException {
-        this.randomAccessFile.close();
+        return new LocalFileSeekableInputStream(this.localFile);
     }
 
     @FunctionalInterface
@@ -39,8 +45,14 @@ class LocalInputFile implements InputFile, AutoCloseable {
         private final byte[] tmpBuf = new byte[COPY_BUFFER_SIZE];
         private final RandomAccessFile randomAccessFile;
 
-        private LocalFileSeekableInputStream(final RandomAccessFile randomAccessFile) {
-            this.randomAccessFile = randomAccessFile;
+        private LocalFileSeekableInputStream(final Path localFile) {
+            try {
+                this.randomAccessFile = new RandomAccessFile(localFile.toFile(), "r");
+            } catch (final FileNotFoundException exception) {
+                throw new UncheckedIOException(
+                        ExaError.messageBuilder("E-PEG-3").message("Failed to open parquet file.").toString(),
+                        exception);
+            }
         }
 
         private static int readDirectBuffer(final ByteBuffer byteBufr, final byte[] tmpBuf, final ByteBufReader rdr)
@@ -79,8 +91,10 @@ class LocalInputFile implements InputFile, AutoCloseable {
             }
 
             if (bytesRead < 0 && byteBufr.remaining() > 0) {
-                throw new EOFException(
-                        "Reached the end of stream with " + byteBufr.remaining() + " bytes left to read");
+                throw new EOFException(ExaError.messageBuilder("F-PEG-5")
+                        .message("Reached the end of stream with {{remaining}} bytes left to read.",
+                                byteBufr.remaining())
+                        .toString());
             }
         }
 

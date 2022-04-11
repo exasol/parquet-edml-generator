@@ -42,8 +42,8 @@ public class ParquetEdmlGenerator {
     }
 
     private MessageType getSchema(final Path parquetFile) {
-        try (final LocalInputFile inputFile = new LocalInputFile(parquetFile);
-                final var reader = ParquetFileReader.open(inputFile)) {
+        final LocalInputFile inputFile = new LocalInputFile(parquetFile);
+        try (final var reader = ParquetFileReader.open(inputFile)) {
             return reader.getFileMetaData().getSchema();
         } catch (final IOException exception) {
             throw new IllegalStateException(ExaError.messageBuilder("E-PEG-1")
