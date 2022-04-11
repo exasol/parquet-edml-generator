@@ -2,6 +2,7 @@ package com.exasol.edmlgenerator.parquet;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.startsWith;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -103,6 +104,6 @@ class LocalInputFileTest {
         final Path nonExistingPath = tempDir.resolve("nonExisting");
         final UncheckedIOException exception = Assertions.assertThrows(UncheckedIOException.class,
                 () -> new LocalInputFile(nonExistingPath));
-        assertThat(exception.getMessage(), equalTo("E-PEG-4: Failed to get size of parquet file."));
+        assertThat(exception.getMessage(), startsWith("E-PEG-4: Failed to get size of parquet file "));
     }
 }
