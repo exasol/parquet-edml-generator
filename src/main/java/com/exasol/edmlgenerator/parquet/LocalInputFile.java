@@ -138,5 +138,10 @@ class LocalInputFile implements InputFile {
         public int read() throws IOException {
             return this.randomAccessFile.read();
         }
+
+        @Override
+        public void close() throws IOException {
+            this.randomAccessFile.close();
+        }
     }
 }
