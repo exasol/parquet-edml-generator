@@ -21,7 +21,7 @@ class LocalInputFile implements InputFile {
             this.size = Files.size(localFile);
         } catch (final IOException exception) {
             throw new UncheckedIOException(
-                    ExaError.messageBuilder("E-PEG-4").message("Failed to get size of parquet file.").toString(),
+                    ExaError.messageBuilder("E-PEG-4").message("Failed to get size of parquet file {{file}}.", this.localFile).toString(),
                     exception);
         }
     }
@@ -118,8 +118,9 @@ class LocalInputFile implements InputFile {
             int n = 0;
             do {
                 final int count = this.read(bytes, offset + n, length - n);
-                if (count < 0)
+                if (count < 0) {
                     throw new EOFException();
+                }
                 n += count;
             } while (n < length);
         }

@@ -86,7 +86,7 @@ class LocalInputFileTest {
     }
 
     @Test
-    void testReadFullyToByteBufferWithToLargeBuffer() throws IOException {
+    void testReadFullyToByteBufferWithTooLargeBuffer() throws IOException {
         final byte[] result = new byte[TEST_CONTENT.length + 1];
         final ByteBuffer byteBuffer = ByteBuffer.wrap(result);
         try (final SeekableInputStream inputStream = localInputFile.newStream()) {
