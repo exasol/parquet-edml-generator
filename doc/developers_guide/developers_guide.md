@@ -9,3 +9,10 @@ By default, this project builds a native executable. For that you need to instal
 ## Building Without Native Image
 
 Building the native image is quite resource expensive (~4GB RAM, 2 min CPU). If you just want to quickly run the build you can also skip it by adding `-p skipNativeImage` as parameter to `mvn`.
+
+## Release
+
+For releasing this project first use [release-droid](https://github.com/exasol/release-droid).
+Next download the binaries from the Linux, Windows and Mac ci-build and add them to the GitHub release.
+
+(Yes, this should be improved. See [#22](https://github.com/exasol/parquet-edml-generator/issues/22))
