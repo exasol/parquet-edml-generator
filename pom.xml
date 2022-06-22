@@ -9,14 +9,8 @@
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <junit.version>5.8.2</junit.version>
-        <jacoco.version>0.8.7</jacoco.version>
-        <vscommon.version>15.2.0</vscommon.version>
-        <gpg.skip>true</gpg.skip>
-        <surefire.and.failsafe.plugin.version>3.0.0-M5</surefire.and.failsafe.plugin.version>
     </properties>
     <profiles>
         <profile>
@@ -36,21 +30,6 @@
             </properties>
         </profile>
     </profiles>
-    <licenses>
-        <license>
-            <name>MIT</name>
-            <url>https://opensource.org/licenses/MIT</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <developers>
-        <developer>
-            <name>Exasol</name>
-            <email>opensource@exasol.com</email>
-            <organization>Exasol AG</organization>
-            <organizationUrl>https://www.exasol.com/</organizationUrl>
-        </developer>
-    </developers>
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -61,11 +40,6 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-    <scm>
-        <connection>scm:git:https://github.com/exasol/parquet-edml-generator.git</connection>
-        <developerConnection>scm:git:https://github.com/exasol/parquet-edml-generator.git</developerConnection>
-        <url>https://github.com/exasol/parquet-edml-generator/tree/master</url>
-    </scm>
     <repositories>
         <repository>
             <id>maven.exasol.com</id>
