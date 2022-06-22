@@ -2,3 +2,4 @@ error-tags:
   PEG:
     packages:
       - com.exasol.edmlgenerator.parquet
+    highest-index: 6
