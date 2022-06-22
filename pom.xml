@@ -7,7 +7,7 @@
     <version>1.1.0</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
-    <url>https://github.com/exasol/parquet-edml-generator</url>
+    <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.12.2</version>
+            <version>1.12.3</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -134,7 +134,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.3.1</version>
+            <version>3.3.3</version>
             <!-- Excluding transitive dependencies with vulnerabilities. -->
             <exclusions>
                 <exclusion>
@@ -189,6 +189,14 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>*</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.google.protobuf</groupId>
+                    <artifactId>protobuf-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.squareup.okhttp</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- test dependencies -->
@@ -219,7 +227,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.3.1</version>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -228,7 +236,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.2.0</version>
+                <version>2.4.6</version>
                 <executions>
                     <execution>
                         <goals>
@@ -280,8 +288,8 @@
                 <configuration>
                     <skip>${native-image.skip}</skip>
                     <imageName>${project.artifactId}</imageName>
-                    <buildArgs>
-                        --no-fallback -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
+                    <buildArgs>--no-fallback
+                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
                     </buildArgs>
                 </configuration>
             </plugin>
