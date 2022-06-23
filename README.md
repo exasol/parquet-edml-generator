@@ -18,7 +18,7 @@ This is a tool that generates EDML definitions for Parquet files.
 
 ## Installation
 
-Download the binary for your OS from the latest [Releases](https://github.com/exasol/parquet-edml-generator/releases).
+Download the binary for your operating system from the latest [release](https://github.com/exasol/parquet-edml-generator/releases).
 
 ## Usage
 
@@ -35,7 +35,7 @@ Run on your local PC:
 
 
 ```shell
-./parquet-edml-generator-linux-binary  <parquet file>
+./parquet-edml-generator-linux-binary <parquet file>
 ```
 
 ### Mac OS
@@ -43,7 +43,7 @@ Run on your local PC:
 Run on your local PC:
 
 ```shell
-./parquet-edml-generator-mac-binary  <parquet file>
+./parquet-edml-generator-mac-binary <parquet file>
 ```
 
 ### Other
