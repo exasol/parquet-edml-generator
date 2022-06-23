@@ -18,13 +18,37 @@ This is a tool that generates EDML definitions for Parquet files.
 
 ## Installation
 
-In order to use this tool you need Java >= 11 installed on your system.
-
-Download the jar from the latest [Releases](https://github.com/exasol/parquet-edml-generator/releases).
+Download the binary for your operating system from the latest [release](https://github.com/exasol/parquet-edml-generator/releases).
 
 ## Usage
 
+### Windows
+
 Run on your local PC:
+
+```shell
+parquet-edml-generator.exe <parquet file>
+```
+### Linux
+
+Run on your local PC:
+
+
+```shell
+./parquet-edml-generator-linux-binary <parquet file>
+```
+
+### Mac OS
+
+Run on your local PC:
+
+```shell
+./parquet-edml-generator-mac-binary <parquet file>
+```
+
+### Other
+
+On other operating systems you can use this tool using Java. For the you need Java >= 11 installed.
 
 ```shell
 java -jar parquet-edml-generator.jar <parquet file>
