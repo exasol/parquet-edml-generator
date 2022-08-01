@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <java.version>11</java.version>
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.9.0</junit.version>
     </properties>
     <profiles>
         <profile>
@@ -77,7 +75,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -171,6 +169,11 @@
                     <groupId>com.squareup.okhttp</groupId>
                     <artifactId>okhttp</artifactId>
                 </exclusion>
+                <exclusion>
+                    <!-- Fix CVE-2022-2047 -->
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-client</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- test dependencies -->
@@ -210,7 +213,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.4.6</version>
+                <version>2.5.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -263,8 +266,7 @@
                     <skip>${native-image.skip}</skip>
                     <imageName>${project.artifactId}</imageName>
                     <buildArgs>--no-fallback
-                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
-                    </buildArgs>
+                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json</buildArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -280,7 +282,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
