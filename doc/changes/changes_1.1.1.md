@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.1, released 2022-??-??
+# Parquet EDML Generator 1.1.1, released 2022-08-01
 
 Code name: Upgrade dependencies to fix vulnerabilities
 
