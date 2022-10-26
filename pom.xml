@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>maven-project-version-getter</artifactId>
-            <version>1.1.1</version>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.itsallcode</groupId>
@@ -181,7 +181,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.8.0</version>
+            <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -250,8 +250,19 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
-                    <forkCount>0</forkCount>
-                    <excludedGroups>${test.excludeTags}</excludedGroups>
+                    <useModulePath>false</useModulePath>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.ossindex.maven</groupId>
+                <artifactId>ossindex-maven-plugin</artifactId>
+                <configuration>
+                    <excludeVulnerabilityIds>
+                        <!-- org.apache.hadoop:hadoop-hdfs-client:jar:3.3.4: XXE attack in command line tool "hdfs ec"; not used by the connector -->
+                        <exclude>sonatype-2022-5732</exclude>
+                        <!-- org.apache.hadoop:hadoop-common:jar:3.3.4: Same root cause as above, but according to HADOOP-18469 does not result in known issue -->
+                        <exclude>sonatype-2022-5820</exclude>
+                    </excludeVulnerabilityIds>
                 </configuration>
             </plugin>
         </plugins>
@@ -259,7 +270,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
