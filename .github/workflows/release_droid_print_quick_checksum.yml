@@ -13,9 +13,9 @@ jobs:
           fetch-depth: 0
       - uses: graalvm/setup-graalvm@v1
         with:
-          version: '22.2.0'
-          java-version: '11'
-          components: 'native-image'
+          version: "22.3.1"
+          java-version: "11"
+          components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache local Maven repository
         uses: actions/cache@v3
@@ -28,4 +28,3 @@ jobs:
         run: mvn --batch-mode clean verify -DskipTests
       - name: Print checksum
         run: echo 'checksum_start==';find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + | xargs;echo '==checksum_end'
-

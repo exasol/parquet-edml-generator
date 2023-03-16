@@ -26,7 +26,7 @@ public class ParquetTestFixture {
 
     public void assertGeneratedEdmlDefinition(final EdmlDefinition edmlDefinition) {
         final Fields fields = (Fields) edmlDefinition.getMapping();
-        final ToDecimalMapping toDecimalMapping = (ToDecimalMapping) fields.getFields().get("element");
+        final ToDecimalMapping toDecimalMapping = (ToDecimalMapping) fields.getFieldsMap().get("element");
         assertAll(//
                 () -> assertThat(toDecimalMapping.getDecimalPrecision(), equalTo(10)),
                 () -> assertThat(toDecimalMapping.getDecimalScale(), equalTo(0)),
