@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.4, released 2023-03-??
+# Parquet EDML Generator 1.1.4, released 2023-03-17
 
 Code name: Upgrade dependencies
 
@@ -8,12 +8,18 @@ This release fixes vulnerabilities in dependencies:
 
 * `com.fasterxml.woodstox:woodstox-core:jar:5.3.0`: CVE-2022-40152
 * `org.json:json:jar:20220320:compile`: CVE-2022-45688
-* `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile` [sonatype-2022-6438](https://ossindex.sonatype.org/vulnerability/sonatype-2022-6438)
+* `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile` `sonatype-2022-6438`
 * `commons-net:commons-net:jar:3.6:compile`: CVE-2021-37533
+
+Please note that starting from this release we don't provide native binaries for macOS, because execution fails on macOS 13 Ventura. Support for native binaries on macOS will be added in issue #36.
 
 ## Security
 
-* #33: Upgrade dependencies to fix vulnerabilities:
+* #33: Upgrade dependencies to fix vulnerabilities
+
+## Refactoring
+
+* #22: Automatically upload binaries for all platforms to GitHub release
 
 ## Dependency Updates
 
