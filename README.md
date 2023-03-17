@@ -29,22 +29,18 @@ Run on your local PC:
 ```shell
 parquet-edml-generator.exe <parquet file>
 ```
+
 ### Linux
 
 Run on your local PC:
-
 
 ```shell
 ./parquet-edml-generator-linux-binary <parquet file>
 ```
 
-### Mac OS
+### macOS
 
-Run on your local PC:
-
-```shell
-./parquet-edml-generator-mac-binary <parquet file>
-```
+Please note that we currently don't provide native binaries for macOS, because execution fails on macOS 13 Ventura. Support for native binaries on macOS will be added in issue [#36](https://github.com/exasol/parquet-edml-generator/issues/36).
 
 ### Other
 

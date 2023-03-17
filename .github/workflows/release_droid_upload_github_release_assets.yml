@@ -13,10 +13,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
         include:
-          - os: macos-latest
-            binary: parquet-edml-generator-mac_x86
           - os: windows-latest
             binary: parquet-edml-generator-win_x86
             suffix: .exe

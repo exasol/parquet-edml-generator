@@ -11,6 +11,8 @@ This release fixes vulnerabilities in dependencies:
 * `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile` `sonatype-2022-6438`
 * `commons-net:commons-net:jar:3.6:compile`: CVE-2021-37533
 
+Please note that starting from this release we don't provide native binaries for macOS, because execution fails on macOS 13 Ventura. Support for native binaries on macOS will be added in issue #36.
+
 ## Security
 
 * #33: Upgrade dependencies to fix vulnerabilities
