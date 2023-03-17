@@ -61,6 +61,9 @@ jobs:
           $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
           (Get-FileHash ${{ matrix.binary }}${{ matrix.suffix }} -Algorithm SHA256).Hash.ToLower() > ${{ matrix.binary }}.sha256
 
+      - name: List
+        run: ls -lha target/
+
       - name: Upload binary to the GitHub release draft
         uses: shogo82148/actions-upload-release-asset@v1
         with:
@@ -71,7 +74,7 @@ jobs:
         uses: shogo82148/actions-upload-release-asset@v1
         with:
           upload_url: ${{ github.event.inputs.upload_url }}
-          asset_path: ${{ matrix.binary }}.sha256
+          asset_path: target/${{ matrix.binary }}.sha256
 
       - name: Upload jar and sha256 checksum file
         if: ${{ matrix.os == 'ubuntu-latest' }}
