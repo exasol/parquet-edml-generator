@@ -47,7 +47,7 @@ jobs:
 
       - name: Generate sha256sum files for JARs
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: find target -maxdepth 1 -name *.jar -exec bash -c 'sha256sum {} > {}.sha256' \;
+        run: cd target && find . -maxdepth 1 -name *.jar -exec bash -c 'sha256sum {} > {}.sha256' \;
 
       - name: Generate sha256sum for binary (Unix)
         if: ${{ matrix.os != 'windows-latest' }}
