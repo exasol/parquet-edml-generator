@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.4, released 2023-03-??
+# Parquet EDML Generator 1.1.4, released 2023-03-17
 
 Code name: Upgrade dependencies
 
@@ -13,7 +13,11 @@ This release fixes vulnerabilities in dependencies:
 
 ## Security
 
-* #33: Upgrade dependencies to fix vulnerabilities:
+* #33: Upgrade dependencies to fix vulnerabilities
+
+## Refactoring
+
+* #22: Automatically upload binaries for all platforms to GitHub release
 
 ## Dependency Updates
 

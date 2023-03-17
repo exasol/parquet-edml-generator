@@ -61,9 +61,6 @@ jobs:
           $PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
           (Get-FileHash ${{ matrix.binary }}${{ matrix.suffix }} -Algorithm SHA256).Hash.ToLower() > ${{ matrix.binary }}.sha256
 
-      - name: List
-        run: ls -lha target/
-
       - name: Upload binary to the GitHub release draft
         uses: shogo82148/actions-upload-release-asset@v1
         with:
