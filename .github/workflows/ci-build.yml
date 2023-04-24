@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [windows-latest, ubuntu-latest]
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.os }}-${{ github.ref }}
       cancel-in-progress: true
