@@ -18,6 +18,7 @@ This release fixes vulnerability CVE-2023-26048 (Uncontrolled Resource Consumpti
 * Updated `info.picocli:picocli:4.7.1` to `4.7.3`
 * Updated `org.apache.hadoop:hadoop-client:3.3.4` to `3.3.5`
 * Updated `org.apache.parquet:parquet-hadoop:1.12.3` to `1.13.0`
+* Removed `org.slf4j:slf4j-jdk14:1.7.36`
 
 ### Test Dependency Updates
 
