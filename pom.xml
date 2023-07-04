@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>5.9.3</junit.version>
     </properties>
     <profiles>
         <profile>
@@ -47,7 +47,15 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.13.0</version>
+            <version>1.13.1</version>
+        </dependency>
+        <!-- override dependency of org.apache.parquet:parquet-hadoop
+             to fix vulnerabilities
+             CVE-2023-34453, CVE-2023-34454, and CVE-2023-34455 -->
+        <dependency>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+            <version>1.1.10.1</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -57,7 +65,7 @@
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
-            <version>4.7.3</version>
+            <version>4.7.4</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -72,7 +80,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.3.5</version>
+            <version>3.3.6</version>
             <!-- Excluding transitive dependencies with vulnerabilities. -->
             <exclusions>
                 <exclusion>
@@ -190,7 +198,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.3.1</version>
+            <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -287,7 +295,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.5</version>
+        <version>1.1.6</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
