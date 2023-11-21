@@ -1,6 +1,6 @@
 # Parquet EDML Generator 1.1.6, released 2023-07-04
 
-Code name: Dependency Updgrade on top of 1.1.5
+Code name: Dependency Upgrade on top of 1.1.5
 
 ## Summary
 

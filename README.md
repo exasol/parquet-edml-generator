@@ -44,7 +44,7 @@ Please note that we currently don't provide native binaries for macOS, because e
 
 ### Other
 
-On other operating systems you can use this tool using Java. For the you need Java >= 11 installed.
+On other operating systems you can use this tool using Java. For the you need Java >= 17 installed.
 
 ```shell
 java -jar parquet-edml-generator.jar <parquet file>
