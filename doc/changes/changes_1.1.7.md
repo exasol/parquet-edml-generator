@@ -13,6 +13,8 @@ This release fixes the following vulnerabilities the following compile time depe
 * `org.apache.avro:avro:jar:1.7.7`
     * CVE-2023-39410, severity CWE-502: Deserialization of Untrusted Data (7.5)
 
+**Note:** Starting with this release we build the project with Java 17. This means you will need to install Java Runtime Environment (JRE) version 17 or later in order to run the JAR files using `java -jar`.
+
 ## Security
 
 * #42: Fixed vulnerabilities CVE-2023-40167, CVE-2023-43642 and CVE-2023-39410 in dependencies

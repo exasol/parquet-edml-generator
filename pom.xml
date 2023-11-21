@@ -9,6 +9,7 @@
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
         <junit.version>5.10.1</junit.version>
+        <java.version>11</java.version>
     </properties>
     <profiles>
         <profile>
