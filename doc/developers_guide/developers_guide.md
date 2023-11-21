@@ -8,4 +8,4 @@ By default, this project builds a native executable. For that you need to instal
 
 ## Building Without Native Image
 
-Building the native image is quite resource expensive (~4GB RAM, 2 min CPU). If you just want to quickly run the build you can also skip it by adding `-p skipNativeImage` as parameter to `mvn`.
+Building the native image is quite resource expensive (~4GB RAM, 2 min CPU). If you just want to quickly run the build you can also skip it by adding `--activate-profiles skipNativeImage` as parameter to `mvn`.
