@@ -1,5 +1,4 @@
 name: Release Droid - Upload GitHub Release Assets
-
 on:
   workflow_dispatch:
     inputs:
