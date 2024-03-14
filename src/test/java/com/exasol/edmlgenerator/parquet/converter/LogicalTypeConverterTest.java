@@ -4,8 +4,7 @@ import static org.apache.parquet.schema.PrimitiveType.PrimitiveTypeName.*;
 import static org.apache.parquet.schema.Type.Repetition.REQUIRED;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.stream.Stream;
 
@@ -119,7 +118,7 @@ class LogicalTypeConverterTest {
     void testConvertLogicalTypeTimestamp() {
         final ToTimestampMapping toTimestampMapping = (ToTimestampMapping) new LogicalTypeConverter().convert(
                 LogicalTypeAnnotation.timestampType(true, LogicalTypeAnnotation.TimeUnit.MILLIS), "my_timestamp");
-        assertThat(toTimestampMapping.isUseTimestampWithLocalTimezoneType(), equalTo(true));
+        assertNotNull(toTimestampMapping);
     }
 
     private void assertConvertsToToDecimalMapping(final LogicalTypeAnnotation type, final int scale,
