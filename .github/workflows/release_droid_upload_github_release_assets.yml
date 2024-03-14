@@ -29,16 +29,17 @@ jobs:
           fetch-depth: 0
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: "17"
+          java-version: "11"
           components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cache local Maven repository
-        uses: actions/cache@v3
+      - name: Set up JDKs
+        uses: actions/setup-java@v4
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          distribution: "temurin"
+          java-version: |
+            11
+            17
+          cache: "maven"
       - name: Build with Maven skipping tests
         run: mvn --batch-mode clean verify -DskipTests
       - name: Rename binary to ${{ matrix.binary }}${{ matrix.suffix }}
