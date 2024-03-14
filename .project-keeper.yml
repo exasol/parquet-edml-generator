@@ -8,9 +8,10 @@ linkReplacements:
   - "https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jsr310|https://github.com/FasterXML/jackson-modules-java8/"
   - "http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.txt|http://cecill.info/licences/Licence_CeCILL-C_V1-en.txt"
 excludes:
+  # Custom build process using native image
+  - "W-PK-CORE-153: Project-keeper version 4.1.0 is outdated. Please update project-keeper to latest version 4.2.0."
   - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build-next-java.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_prepare_original_checksum.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_print_quick_checksum.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_upload_github_release_assets.yml'"
-  - regex: "E-PK-CORE-53: The dependencies.md file has outdated content.*"
