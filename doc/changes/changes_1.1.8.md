@@ -13,6 +13,7 @@ Code name:
 ### Compile Dependency Updates
 
 * Updated `com.exasol:edml-java:1.2.1` to `2.0.0`
+* Added `org.apache.commons:commons-compress:1.26.1`
 
 ### Test Dependency Updates
 

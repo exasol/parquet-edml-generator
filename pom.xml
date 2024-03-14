@@ -105,7 +105,18 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro</artifactId>
                 </exclusion>
+                <!-- CVE-2023-52428 -->
+                <exclusion>
+                    <groupId>com.nimbusds</groupId>
+                    <artifactId>nimbus-jose-jwt</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25710 & CVE-2024-26308 -->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.26.1</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
