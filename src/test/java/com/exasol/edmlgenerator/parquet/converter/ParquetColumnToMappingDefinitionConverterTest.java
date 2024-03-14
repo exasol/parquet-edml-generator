@@ -69,10 +69,7 @@ class ParquetColumnToMappingDefinitionConverterTest {
         final Type logicalTimestampType = Types.primitive(INT96, REQUIRED).named("myTimestamp");
         final ToTimestampMapping toTimestampMapping = (ToTimestampMapping) new ParquetColumnToMappingDefinitionConverter()
                 .convert(logicalTimestampType);
-        assertAll(//
-                () -> assertThat(toTimestampMapping.getDestinationName(), equalTo("MY_TIMESTAMP")), //
-                () -> assertThat(toTimestampMapping.isUseTimestampWithLocalTimezoneType(), equalTo(true))//
-        );
+        assertThat(toTimestampMapping.getDestinationName(), equalTo("MY_TIMESTAMP"));
     }
 
     private void assertConvertsToToVarcharMapping(final Type type, final String expectedName, final int expectedSize) {

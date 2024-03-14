@@ -3,13 +3,16 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.7</version>
+    <version>1.1.8</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <junit.version>5.10.1</junit.version>
-        <java.version>11</java.version>
+        <junit.version>5.10.2</junit.version>
+        <java.version>17</java.version>
+        <picocli.version>4.7.5</picocli.version>
+        <sonar.organization>exasol</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <profiles>
         <profile>
@@ -51,12 +54,12 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
-            <version>1.2.1</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
-            <version>4.7.5</version>
+            <version>${picocli.version}</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -104,7 +107,18 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro</artifactId>
                 </exclusion>
+                <!-- CVE-2023-52428 -->
+                <exclusion>
+                    <groupId>com.nimbusds</groupId>
+                    <artifactId>nimbus-jose-jwt</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25710 & CVE-2024-26308 -->
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.26.1</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -134,7 +148,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.7.0</version>
+            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -143,7 +157,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.9.16</version>
+                <version>2.9.17</version>
                 <executions>
                     <execution>
                         <goals>
@@ -172,11 +186,12 @@
                         <path>
                             <groupId>info.picocli</groupId>
                             <artifactId>picocli-codegen</artifactId>
-                            <version>4.6.3</version>
+                            <version>${picocli.version}</version>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
+                        <arg>-Xlint:all,-processing</arg>
+                        <arg>-Werror</arg>
                     </compilerArgs>
                 </configuration>
             </plugin>
@@ -221,7 +236,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.7</version>
+        <version>1.1.8</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
