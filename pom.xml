@@ -11,6 +11,8 @@
         <junit.version>5.10.2</junit.version>
         <java.version>17</java.version>
         <picocli.version>4.7.5</picocli.version>
+        <sonar.organization>exasol</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <profiles>
         <profile>
