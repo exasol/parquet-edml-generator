@@ -26,16 +26,15 @@ jobs:
           fetch-depth: 0
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: "11"
+          java-version: "17"
+          distribution: "graalvm-community"
           components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up JDKs
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
-          java-version: |
-            11
-            17
+          java-version: 17
           cache: "maven"
       - name: Cache SonarCloud packages
         uses: actions/cache@v4
