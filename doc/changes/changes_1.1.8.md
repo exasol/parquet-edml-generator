@@ -1,12 +1,21 @@
-# Parquet EDML Generator 1.1.8, released 2024-??-??
+# Parquet EDML Generator 1.1.8, released 2024-03-14
 
-Code name:
+Code name: Fixed CVE-2024-26308, CVE-2024-25710 and CVE-2023-52428 in compile dependencies
 
 ## Summary
 
-## Features
+This release fixes vulnerabilities in the following compile dependencies:
+* `org.apache.commons:commons-compress:jar:1.21:compile`:
+  * CVE-2024-26308
+  * CVE-2024-25710
+* `com.nimbusds:nimbus-jose-jwt:jar:9.8.1:compile`:
+  * CVE-2023-52428
 
-* ISSUE_NUMBER: description
+## Security
+
+* #46: Fixed CVE-2024-26308 in `org.apache.commons:commons-compress:jar:1.21:compile`
+* #45: Fixed CVE-2024-25710 in `org.apache.commons:commons-compress:jar:1.21:compile`
+* #44: Fixed CVE-2023-52428 in `com.nimbusds:nimbus-jose-jwt:jar:9.8.1:compile`
 
 ## Dependency Updates
 
