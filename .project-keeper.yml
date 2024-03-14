@@ -12,6 +12,9 @@ excludes:
   - "W-PK-CORE-153: Project-keeper version 4.1.0 is outdated. Please update project-keeper to latest version 4.2.0."
   - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_upload_github_release_assets.yml'"
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build-next-java.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_prepare_original_checksum.yml'"
   - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_print_quick_checksum.yml'"
+  # Toolchain plugin introduced with later PK versions causes problems with native image
+  - regex: "W-PK-CORE-153: Project-keeper version 2.9.17 is outdated. Please update project-keeper to latest version .*."
+  # Already building with Java 17
+  - "E-PK-CORE-17: Missing required file: '.github/workflows/ci-build-next-java.yml'"
