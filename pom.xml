@@ -115,12 +115,17 @@
                 <exclusion>
                     <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
                     <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-mapreduce-client-core</artifactId>
+                    <artifactId>hadoop-mapreduce-client-core-xyz</artifactId>
                 </exclusion>
                 <exclusion>
                     <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-handler</artifactId>
+                </exclusion>
+                <exclusion>
+                    <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-all</artifactId>
                 </exclusion>
                 <exclusion>
                     <!-- Fix CVE-2023-33201 & CVE-2023-33202 -->
