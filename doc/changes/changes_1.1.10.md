@@ -15,4 +15,4 @@ Updated dependencies.
 
 ### Compile Dependency Updates
 
-* Updated `org.apache.parquet:parquet-hadoop:1.13.1` to `1.14.0`
+* Added `io.airlift:aircompressor:0.27`

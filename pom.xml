@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.14.0</version>
+            <version>1.13.1</version>
         </dependency>
         <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-36114 -->
         <dependency>
