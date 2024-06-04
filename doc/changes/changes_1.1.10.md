@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.10, released 2024-06-03
+# Parquet EDML Generator 1.1.10, released 2024-06-04
 
 Code name: Security update - fix for CVE-2024-36114
 
