@@ -141,6 +141,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25638 -->
+            <groupId>dnsjava</groupId>
+            <artifactId>dnsjava</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
             <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25710 & CVE-2024-26308 -->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>

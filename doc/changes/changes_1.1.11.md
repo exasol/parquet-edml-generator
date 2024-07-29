@@ -15,6 +15,7 @@ This release fixes vulnerability CVE-2024-25638 in `dnsjava:dnsjava:jar:3.4.0:co
 ### Compile Dependency Updates
 
 * Updated `com.exasol:edml-java:2.0.0` to `2.1.0`
+* Added `dnsjava:dnsjava:3.6.1`
 * Updated `info.picocli:picocli:4.7.5` to `4.7.6`
 * Updated `org.apache.commons:commons-compress:1.26.1` to `1.26.2`
 * Updated `org.apache.parquet:parquet-hadoop:1.13.1` to `1.14.1`
