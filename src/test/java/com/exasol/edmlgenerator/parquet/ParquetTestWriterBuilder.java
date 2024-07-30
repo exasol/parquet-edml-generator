@@ -4,10 +4,12 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.parquet.conf.ParquetConfiguration;
 import org.apache.parquet.example.data.Group;
 import org.apache.parquet.example.data.GroupWriter;
 import org.apache.parquet.hadoop.ParquetWriter;
 import org.apache.parquet.hadoop.api.WriteSupport;
+import org.apache.parquet.hadoop.util.ConfigurationUtil;
 import org.apache.parquet.io.api.RecordConsumer;
 import org.apache.parquet.schema.MessageType;
 
@@ -24,9 +26,15 @@ public class ParquetTestWriterBuilder extends ParquetWriter.Builder<Group, Parqu
         return this;
     }
 
+    @SuppressWarnings("deprecation") // Argument type is now ParquetConfiguration
     @Override
     protected WriteSupport<Group> getWriteSupport(final Configuration conf) {
         return new MyGroupWriteSupport(this.schema);
+    }
+
+    @Override
+    protected WriteSupport<Group> getWriteSupport(final ParquetConfiguration conf) {
+        return getWriteSupport(ConfigurationUtil.createHadoopConfiguration(conf));
     }
 
     private static class MyGroupWriteSupport extends WriteSupport<Group> {
@@ -37,9 +45,15 @@ public class ParquetTestWriterBuilder extends ParquetWriter.Builder<Group, Parqu
             this.schema = schema;
         }
 
+        @SuppressWarnings("deprecation") // Argument type is now ParquetConfiguration
         @Override
         public WriteContext init(final Configuration configuration) {
             return new WriteContext(this.schema, Collections.emptyMap());
+        }
+
+        @Override
+        public WriteContext init(final ParquetConfiguration configuration) {
+            return init(ConfigurationUtil.createHadoopConfiguration(configuration));
         }
 
         @Override

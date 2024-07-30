@@ -3,14 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.10</version>
+    <version>1.1.11</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <junit.version>5.10.2</junit.version>
+        <junit.version>5.10.3</junit.version>
         <java.version>17</java.version>
-        <picocli.version>4.7.5</picocli.version>
+        <picocli.version>4.7.6</picocli.version>
         <sonar.organization>exasol</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.13.1</version>
+            <version>1.14.1</version>
         </dependency>
         <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-36114 -->
         <dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -141,16 +141,22 @@
             </exclusions>
         </dependency>
         <dependency>
+            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25638 -->
+            <groupId>dnsjava</groupId>
+            <artifactId>dnsjava</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
             <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25710 & CVE-2024-26308 -->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.26.1</version>
+            <version>1.26.2</version>
         </dependency>
         <dependency>
             <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-29131 & CVE-2024-29133 -->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
-            <version>2.10.1</version>
+            <version>2.11.0</version>
             <scope>runtime</scope>
         </dependency>
         <!-- test dependencies -->
@@ -181,7 +187,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.11.0</version>
+            <version>5.12.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -269,7 +275,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.10</version>
+        <version>1.1.11</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
