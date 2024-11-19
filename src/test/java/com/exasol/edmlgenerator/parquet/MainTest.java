@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.itsallcode.io.Capturable;
-import org.itsallcode.junit.sysextensions.ExitGuard;
 import org.itsallcode.junit.sysextensions.SystemOutGuard;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
