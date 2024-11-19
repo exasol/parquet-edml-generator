@@ -19,7 +19,6 @@ import com.exasol.adapter.document.edml.deserializer.EdmlDeserializer;
 import com.exasol.mavenprojectversiongetter.MavenProjectVersionGetter;
 
 @ExtendWith(SystemOutGuard.class)
-@ExtendWith(ExitGuard.class)
 class MainTest {
 
     @Test
