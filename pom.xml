@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.11</version>
+    <version>1.1.12</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <junit.version>5.10.3</junit.version>
+        <junit.version>5.11.3</junit.version>
         <java.version>17</java.version>
         <picocli.version>4.7.6</picocli.version>
         <sonar.organization>exasol</sonar.organization>
@@ -41,21 +41,13 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.14.1</version>
+            <version>1.14.4</version>
         </dependency>
-        <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-36114 -->
+        <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-47535 -->
         <dependency>
-            <groupId>io.airlift</groupId>
-            <artifactId>aircompressor</artifactId>
-            <version>0.27</version>
-        </dependency>
-        <!-- override dependency of org.apache.parquet:parquet-hadoop
-             to fix vulnerabilities
-             CVE-2023-34453, CVE-2023-34454, and CVE-2023-34455 -->
-        <dependency>
-            <groupId>org.xerial.snappy</groupId>
-            <artifactId>snappy-java</artifactId>
-            <version>1.1.10.5</version>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-common</artifactId>
+            <version>4.1.115.Final</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
@@ -75,24 +67,14 @@
         <dependency>
             <groupId>org.itsallcode</groupId>
             <artifactId>junit5-system-extensions</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.4.0</version>
+            <version>3.4.1</version>
             <!-- Excluding transitive dependencies with vulnerabilities. -->
             <exclusions>
-                <!-- CVE-2021-22569 and CVE-2022-3509 -->
-                <exclusion>
-                    <groupId>com.google.protobuf</groupId>
-                    <artifactId>protobuf-java</artifactId>
-                </exclusion>
-                <!-- CVE-2017-7525 and CVE-2019-10172 -->
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-mapper-asl</artifactId>
-                </exclusion>
                 <!-- CVE-2023-2976 and CVE-2020-8908 -->
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -113,57 +95,18 @@
                     <groupId>org.apache.avro</groupId>
                     <artifactId>avro</artifactId>
                 </exclusion>
-                <!-- CVE-2023-52428 -->
+                <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
                 <exclusion>
-                    <groupId>com.nimbusds</groupId>
-                    <artifactId>nimbus-jose-jwt</artifactId>
-                </exclusion>
-                <exclusion>
-                    <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-mapreduce-client-core-xyz</artifactId>
-                </exclusion>
-                <exclusion>
-                    <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-handler</artifactId>
-                </exclusion>
-                <exclusion>
-                    <!-- Fix CVE-2024-29025 in io.netty:netty-codec-http -->
                     <groupId>io.netty</groupId>
                     <artifactId>netty-all</artifactId>
                 </exclusion>
-                <exclusion>
-                    <!-- Fix CVE-2023-33201 & CVE-2023-33202 -->
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcprov-jdk15on</artifactId>
-                </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25638 -->
-            <groupId>dnsjava</groupId>
-            <artifactId>dnsjava</artifactId>
-            <version>3.6.1</version>
-        </dependency>
-        <dependency>
-            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-25710 & CVE-2024-26308 -->
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-compress</artifactId>
-            <version>1.26.2</version>
-        </dependency>
-        <dependency>
-            <!-- Upgrade transitive dependency of hadoop-client to fix CVE-2024-29131 & CVE-2024-29133 -->
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-configuration2</artifactId>
-            <version>2.11.0</version>
-            <scope>runtime</scope>
         </dependency>
         <!-- test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
+            <version>3.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -187,7 +130,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.12.0</version>
+            <version>5.14.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -275,7 +218,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.11</version>
+        <version>1.1.12</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
