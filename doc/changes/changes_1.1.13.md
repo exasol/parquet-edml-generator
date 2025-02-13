@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.13, released 2025-02.13
+# Parquet EDML Generator 1.1.13, released 2025-02-13
 
 Code name: Fixed CVE-2025-24970 and CVE-2025-25193
 
