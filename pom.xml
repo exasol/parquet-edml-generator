@@ -42,12 +42,6 @@
             <artifactId>parquet-hadoop</artifactId>
             <version>1.15.2</version>
         </dependency>
-        <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-47535 -->
-        <!-- <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-common</artifactId>
-            <version>4.2.1.Final</version>
-        </dependency> -->
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
