@@ -111,6 +111,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <!-- Explicitly upgrade transitive dependency of hadoop-client to fix CVE-2025-48734 -->
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.11.0</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>

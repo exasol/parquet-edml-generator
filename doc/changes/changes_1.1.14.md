@@ -16,6 +16,10 @@ Code name:
 * Removed `io.netty:netty-common:4.1.118.Final`
 * Updated `org.apache.parquet:parquet-hadoop:1.15.0` to `1.15.2`
 
+### Runtime Dependency Updates
+
+* Added `commons-beanutils:commons-beanutils:1.11.0`
+
 ### Test Dependency Updates
 
 * Updated `org.junit.jupiter:junit-jupiter-api:5.11.4` to `5.13.0`
