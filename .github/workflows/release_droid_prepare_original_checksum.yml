@@ -23,8 +23,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Enable testcontainer reuse
-        run: echo 'testcontainers.reuse.enable=true' > "$HOME/.testcontainers.properties"
       - name: Run tests and build with Maven
         run: mvn --batch-mode clean verify --file pom.xml
       - name: Prepare checksum
