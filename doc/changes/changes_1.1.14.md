@@ -31,7 +31,7 @@ Code name:
 
 * Updated `com.exasol:artifact-reference-checker-maven-plugin:0.4.2` to `0.4.3`
 * Updated `com.exasol:error-code-crawler-maven-plugin:1.3.1` to `2.0.3`
-* Updated `com.exasol:project-keeper-maven-plugin:2.9.17` to `5.2.0`
+* Updated `com.exasol:project-keeper-maven-plugin:2.9.17` to `5.1.0`
 * Added `com.exasol:quality-summarizer-maven-plugin:0.2.0`
 * Added `io.github.git-commit-id:git-commit-id-maven-plugin:9.0.1`
 * Removed `io.github.zlika:reproducible-build-maven-plugin:0.16`
