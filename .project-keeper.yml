@@ -8,12 +8,11 @@ linkReplacements:
   - "https://github.com/FasterXML/jackson-modules-java8/jackson-datatype-jsr310|https://github.com/FasterXML/jackson-modules-java8/"
   - "http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.txt|http://cecill.info/licences/Licence_CeCILL-C_V1-en.txt"
 excludes:
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_upload_github_release_assets.yml'"
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_prepare_original_checksum.yml'"
-  - "E-PK-CORE-18: Outdated content: '.github/workflows/release_droid_print_quick_checksum.yml'"
   # Custom build process using native image
-  # Toolchain plugin introduced with later PK versions causes problems with native image
-  - regex: "W-PK-CORE-153: Project-keeper version 2.9.17 is outdated. Please update project-keeper to latest version .*."
-  # Already building with Java 17
-  - "E-PK-CORE-17: Missing required file: '.github/workflows/ci-build-next-java.yml'"
+  - "E-PK-CORE-18: Outdated content: '.github/workflows/ci-build.yml'"
+  - "E-PK-CORE-26: '.github/workflows/release_droid_print_quick_checksum.yml' exists but must not exist. Reason: Release-droid workflows are replaced by release.yml"
+  - "E-PK-CORE-26: '.github/workflows/release_droid_upload_github_release_assets.yml' exists but must not exist. Reason: Release-droid workflows are replaced by release.yml"
+  - "E-PK-CORE-26: '.github/workflows/release_droid_prepare_original_checksum.yml' exists but must not exist. Reason: Release-droid workflows are replaced by release.yml"
+  - "E-PK-CORE-26: 'release_config.yml' exists but must not exist. Reason: Release-droid configuration is replaced by release.yml"
+  # Release is done via release droid
+  - "E-PK-CORE-17: Missing required file: '.github/workflows/release.yml'"

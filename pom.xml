@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.13</version>
+    <version>1.1.14</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
         <java.version>17</java.version>
-        <picocli.version>4.7.6</picocli.version>
+        <picocli.version>4.7.7</picocli.version>
         <sonar.organization>exasol</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -40,14 +40,14 @@
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.15.0</version>
+            <version>1.15.2</version>
         </dependency>
         <!-- Update transitive dependency of org.apache.parquet:parquet-hadoop to fix CVE-2024-47535 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-common</artifactId>
-            <version>4.1.118.Final</version>
-        </dependency>
+            <version>4.2.1.Final</version>
+        </dependency> -->
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
@@ -121,25 +121,19 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.4</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.11.4</version>
+            <version>5.13.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
-            <version>5.11.4</version>
+            <version>5.13.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.15.2</version>
+            <version>5.18.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -148,7 +142,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>2.9.17</version>
+                <version>5.2.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -227,7 +221,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.13</version>
+        <version>1.1.14</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
