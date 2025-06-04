@@ -196,7 +196,7 @@
                 </executions>
                 <configuration>
                     <!-- See https://graalvm.github.io/native-build-tools/latest/maven-plugin.html -->
-                    <skipNativeBuild>${native-image.skip}</skipNativeBuild>
+                    <skip>${native-image.skip}</skip>
                     <verbose>false</verbose>
                     <debug>false</debug>
                     <quickBuild>false</quickBuild>
