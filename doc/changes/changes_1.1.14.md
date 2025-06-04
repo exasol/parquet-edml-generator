@@ -50,5 +50,7 @@ This release fixes CVE-2025-48734 in `commons-beanutils:commons-beanutils:jar:1.
 * Added `org.apache.maven.plugins:maven-toolchains-plugin:3.2.0`
 * Updated `org.codehaus.mojo:flatten-maven-plugin:1.5.0` to `1.7.0`
 * Updated `org.codehaus.mojo:versions-maven-plugin:2.16.2` to `2.18.0`
+* Added `org.graalvm.buildtools:native-maven-plugin:0.10.6`
+* Removed `org.graalvm.nativeimage:native-image-maven-plugin:21.2.0`
 * Updated `org.jacoco:jacoco-maven-plugin:0.8.11` to `0.8.13`
 * Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594` to `5.1.0.4751`

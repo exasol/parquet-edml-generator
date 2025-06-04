@@ -153,18 +153,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-toolchains-plugin</artifactId>
-                <configuration>
-                    <toolchains>
-                        <jdk>
-                            <version>${java.version}</version>
-                            <vendor>graalvm</vendor>
-                        </jdk>
-                    </toolchains>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
                 <configuration>
@@ -194,22 +182,27 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.graalvm.nativeimage</groupId>
-                <artifactId>native-image-maven-plugin</artifactId>
-                <version>21.2.0</version>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <version>0.10.6</version>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>native-image</goal>
+                            <goal>compile-no-fork</goal>
                         </goals>
                         <phase>package</phase>
                     </execution>
                 </executions>
                 <configuration>
-                    <skip>${native-image.skip}</skip>
+                    <!-- See https://graalvm.github.io/native-build-tools/latest/maven-plugin.html -->
+                    <skipNativeBuild>${native-image.skip}</skipNativeBuild>
+                    <verbose>false</verbose>
+                    <debug>false</debug>
+                    <quickBuild>false</quickBuild>
                     <imageName>${project.artifactId}</imageName>
-                    <buildArgs>--no-fallback
-                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json</buildArgs>
+                    <fallback>false</fallback>
+                    <buildArgs>-H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json</buildArgs>
                 </configuration>
             </plugin>
             <plugin>
