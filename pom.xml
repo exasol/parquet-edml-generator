@@ -197,7 +197,11 @@
                     <quickBuild>false</quickBuild>
                     <imageName>${project.artifactId}</imageName>
                     <fallback>false</fallback>
-                    <buildArgs>-H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json</buildArgs>
+                    <buildArgs>
+                        <!-- Optimize for size rather than speed -->
+                        -O1
+                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
+                    </buildArgs>
                 </configuration>
             </plugin>
             <plugin>

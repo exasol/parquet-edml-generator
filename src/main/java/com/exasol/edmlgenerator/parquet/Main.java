@@ -38,7 +38,7 @@ public class Main implements Callable<Integer> {
     /**
      * This class provides the current project's version.
      */
-    static class VersionProvider implements CommandLine.IVersionProvider {
+    public static class VersionProvider implements CommandLine.IVersionProvider {
         @Override
         public String[] getVersion() throws Exception {
             return new String[] { MavenProjectVersionGetter.getCurrentProjectVersion() };
