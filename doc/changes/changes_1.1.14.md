@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.14, released 2025-06-03
+# Parquet EDML Generator 1.1.14, released 2025-06-04
 
 Code name: Fix CVE-2025-48734 in `commons-beanutils:commons-beanutils:jar:1.9.4:compile`
 
