@@ -17,6 +17,7 @@ This release fixes CVE-2025-48734 in `commons-beanutils:commons-beanutils:jar:1.
 * Updated `info.picocli:picocli:4.7.6` to `4.7.7`
 * Removed `io.netty:netty-common:4.1.118.Final`
 * Updated `org.apache.parquet:parquet-hadoop:1.15.0` to `1.15.2`
+* Removed `org.itsallcode:junit5-system-extensions:1.2.2`
 
 ### Runtime Dependency Updates
 

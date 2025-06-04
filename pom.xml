@@ -58,11 +58,6 @@
             <version>1.2.1</version>
         </dependency>
         <dependency>
-            <groupId>org.itsallcode</groupId>
-            <artifactId>junit5-system-extensions</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>3.4.1</version>
