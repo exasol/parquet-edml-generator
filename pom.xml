@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.14</version>
+    <version>1.1.15</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
@@ -133,12 +133,44 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Explicitly upgrade transitive dependency of hadoop-client to fix CVE-2025-48734 -->
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.11.0</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--Transitive dependency update for CVE-2025-53864, for direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.13.1</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--Transitive dependency update for CVE-2025-49128, for direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.19.0</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--Transitive dependency update for CVE-2025-48924, for direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.18.0</version>
+                <scope>runtime</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>5.1.0</version>
+                <version>5.2.3</version>
                 <executions>
                     <execution>
                         <goals>
@@ -197,8 +229,7 @@
                     <quickBuild>false</quickBuild>
                     <imageName>${project.artifactId}</imageName>
                     <fallback>false</fallback>
-                    <buildArgs>
-                        <!-- Optimize for size rather than speed -->
+                    <buildArgs><!-- Optimize for size rather than speed -->
                         -O1
                         -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
                     </buildArgs>
@@ -226,7 +257,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.14</version>
+        <version>1.1.15</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
