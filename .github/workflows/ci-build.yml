@@ -42,7 +42,6 @@ jobs:
         with:
           java-version: "21"
           distribution: "graalvm-community"
-          components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache SonarCloud packages
         uses: actions/cache@v5
