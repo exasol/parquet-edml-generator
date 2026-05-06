@@ -4,6 +4,8 @@ Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52
 
 ## Summary
 
+**Breaking Change:** Starting with this release, the Parquet EDML Generator requires Java 21 to run.
+
 This release fixes the following vulnerabilities:
 
 ### CVE-2025-53864 (CWE-121) in dependency `com.google.code.gson:gson:jar:2.9.0:compile`

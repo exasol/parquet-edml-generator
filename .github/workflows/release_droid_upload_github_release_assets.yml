@@ -35,13 +35,13 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           # Disable caching to avoid cache poisoning of release build
       - name: Set up GraalVM
         uses: graalvm/setup-graalvm@bef4b0e916c7dd079bf60fb95d49139f67e32c5f # v1.5.3
         # This will define GRAALVM_HOME used by native-maven-plugin
         with:
-          java-version: "17"
+          java-version: "21"
           distribution: "graalvm-community"
           components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
