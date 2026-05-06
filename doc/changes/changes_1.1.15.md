@@ -1,6 +1,6 @@
 # Parquet EDML Generator 1.1.15, released 2026-05-07
 
-Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52999 and CVE-2025-53864
+Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52999, CVE-2025-53864 and GHSA-72hv-8253-57qq
 
 ## Summary
 
@@ -85,6 +85,7 @@ CWE: CWE-209
 * #69: Fixed vulnerability CVE-2025-48924 in dependency `org.apache.commons:commons-lang3:jar:3.12.0:compile`
 * #68: Fixed vulnerability CVE-2025-52999 in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile`
 * #67: Fixed vulnerability CVE-2025-49128 in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile`
+* #75: Fixed vulnerability GHSA-72hv-8253-57qq in jackson-core
 
 ## Dependency Updates
 
