@@ -46,7 +46,7 @@ jobs:
           components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build with Maven skipping tests
-        run: mvn --batch-mode clean verify -DskipTests
+        run: mvn --batch-mode clean verify -DskipTests -DossindexSkip=true
       - name: Rename binary to ${{ matrix.binary }}${{ matrix.suffix }}
         run: mv "target/parquet-edml-generator${{ matrix.suffix }}" "target/${{ matrix.binary }}${{ matrix.suffix }}"
 

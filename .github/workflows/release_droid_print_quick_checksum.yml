@@ -29,6 +29,6 @@ jobs:
           components: "native-image"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build with Maven skipping tests
-        run: mvn --batch-mode clean verify -DskipTests
+        run: mvn --batch-mode clean verify -DskipTests -DossindexSkip=true
       - name: Print checksum
         run: echo 'checksum_start==';find target -maxdepth 1 -name *.jar -exec sha256sum "{}" + | xargs;echo '==checksum_end'
