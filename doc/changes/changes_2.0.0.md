@@ -1,4 +1,4 @@
-# Parquet EDML Generator 1.1.15, released 2026-05-07
+# Parquet EDML Generator 2.0.0, released 2026-05-07
 
 Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52999, CVE-2025-53864 and GHSA-72hv-8253-57qq
 

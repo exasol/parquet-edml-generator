@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.15</version>
+    <version>2.0.0</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
@@ -229,7 +229,8 @@
                     <quickBuild>false</quickBuild>
                     <imageName>${project.artifactId}</imageName>
                     <fallback>false</fallback>
-                    <buildArgs><!-- Optimize for size rather than speed -->
+                    <buildArgs>
+                        <!-- Optimize for size rather than speed -->
                         -O1
                         -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
                     </buildArgs>
@@ -257,7 +258,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.15</version>
+        <version>2.0.0</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
