@@ -24,7 +24,7 @@ jobs:
         uses: graalvm/setup-graalvm@bef4b0e916c7dd079bf60fb95d49139f67e32c5f # v1.5.3
         # This will define GRAALVM_HOME used by native-maven-plugin
         with:
-          java-version: "21"
+          java-version: "21.0.8"
           distribution: "graalvm-community"
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run tests and build with Maven
