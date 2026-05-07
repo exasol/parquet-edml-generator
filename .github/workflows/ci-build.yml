@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  matrix-build:
     name: Build native-image on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     defaults:
@@ -18,39 +18,34 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
+    env:
+      DEFAULT_OS: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ matrix.os }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Set up GraalVM
-        uses: graalvm/setup-graalvm@v1
-        # This will define GRAALVM_HOME used by native-maven-plugin
-        with:
-          java-version: "17"
-          distribution: "graalvm-community"
-          components: "native-image"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
       - name: Set up JDK
-        # We need a JDK additionally to GraalVM to configure Maven toolchain
-        uses: actions/setup-java@v4
+        # We need a JDK additionally to GraalVM to configure Maven toolchain.
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           cache: maven
-      - name: Cache local Maven repository
-        uses: actions/cache@v4
+      - name: Set up GraalVM
+        uses: graalvm/setup-graalvm@bef4b0e916c7dd079bf60fb95d49139f67e32c5f # v1.5.3
+        # This will define GRAALVM_HOME used by native-maven-plugin
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          java-version: "25"
+          distribution: "graalvm-community"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        if: ${{ env.SONAR_TOKEN != null && matrix.os == 'ubuntu-latest' }}
+        uses: actions/cache@v5
+        if: ${{ env.SONAR_TOKEN != null && matrix.os == env.DEFAULT_OS }}
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
@@ -59,22 +54,108 @@ jobs:
         run: |
           mvn --batch-mode clean verify \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
-              -DtrimStackTrace=false
+              -DtrimStackTrace=false \
+              -DossindexSkip=true
       - name: Sonar analysis
-        if: ${{ env.SONAR_TOKEN != null && matrix.os == 'ubuntu-latest' }}
+        if: ${{ env.SONAR_TOKEN != null && matrix.os == env.DEFAULT_OS }}
         run: |
           mvn --batch-mode org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DtrimStackTrace=false \
+              -DossindexSkip=true \
               -Dsonar.token=$SONAR_TOKEN
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Upload binary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: executable-${{ matrix.os }}
           path: |
             target/${{ github.event.repository.name }}
             target/${{ github.event.repository.name }}.exe
           if-no-files-found: error
+
+  ossindex:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: "bash"
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-ossindex-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout the repository
+        id: checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Set up JDKs
+        id: setup-java
+        uses: actions/setup-java@v5
+        with:
+          distribution: "temurin"
+          java-version: 21
+          cache: "maven"
+          server-id: ossindex
+          server-username: OSSINDEX_USERNAME
+          server-password: OSSINDEX_API_TOKEN
+      - name: Run Ossindex
+        id: ossindex
+        # Note: test-compile required for multi-module projects to avoid dependency resolution problems
+        run: |
+          mvn --batch-mode test-compile \
+              org.sonatype.ossindex.maven:ossindex-maven-plugin:audit \
+              org.sonatype.ossindex.maven:ossindex-maven-plugin:audit-aggregate \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        env:
+          OSSINDEX_USERNAME: ${{ secrets.OSSINDEX_USERNAME }}
+          OSSINDEX_API_TOKEN: ${{ secrets.OSSINDEX_API_TOKEN }}
+
+  next-java-compatibility:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: "bash"
+    permissions:
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-next-java-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout the repository
+        id: checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up JDK
+        id: setup-java
+        uses: actions/setup-java@v5
+        with:
+          distribution: "temurin"
+          java-version: 25
+          cache: "maven"
+      - name: Run tests and build with next Java version
+        id: build-next-java
+        run: |
+          mvn --batch-mode clean package -DtrimStackTrace=false \
+              -Djava.version=25 -PskipNativeImage \
+              -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
+              -DossindexSkip=true
+
+  build:
+    needs:
+      - matrix-build
+      - ossindex
+      - next-java-compatibility
+    runs-on: ubuntu-slim
+    defaults:
+      run:
+        shell: "bash"
+    permissions:
+      contents: read
+    steps:
+      - run: echo "Success"

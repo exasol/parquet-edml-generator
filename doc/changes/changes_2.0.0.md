@@ -1,10 +1,15 @@
-# Parquet EDML Generator 1.1.15, released 2025-08-07
+# Parquet EDML Generator 2.0.0, released 2026-05-07
 
-Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52999 and CVE-2025-53864
+Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52999, CVE-2025-53864 and GHSA-72hv-8253-57qq
 
 ## Summary
 
+**Breaking Change:** Starting with this release, the Parquet EDML Generator requires Java 21 to run. The native binary is now built with GraalVM 25.
+
 This release fixes the following vulnerabilities:
+
+* CVE-2026-0636, CVE-2026-5588, CVE-2026-5598 in `org.bouncycastle:bcprov-jdk18on`
+* CVE-2025-67721 in `io.airlift:aircompressor`
 
 ### CVE-2025-53864 (CWE-121) in dependency `com.google.code.gson:gson:jar:2.9.0:compile`
 
@@ -85,14 +90,47 @@ CWE: CWE-209
 * #69: Fixed vulnerability CVE-2025-48924 in dependency `org.apache.commons:commons-lang3:jar:3.12.0:compile`
 * #68: Fixed vulnerability CVE-2025-52999 in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile`
 * #67: Fixed vulnerability CVE-2025-49128 in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.12.7:compile`
+* #75: Fixed vulnerability GHSA-72hv-8253-57qq in jackson-core
 
 ## Dependency Updates
+
+### Compile Dependency Updates
+
+* Updated `com.exasol:edml-java:2.1.0` to `2.1.1`
+* Updated `com.exasol:error-reporting-java:1.0.1` to `1.0.2`
+* Updated `com.exasol:maven-project-version-getter:1.2.1` to `1.2.2`
+* Updated `org.apache.hadoop:hadoop-client:3.4.1` to `3.5.0`
+* Updated `org.apache.parquet:parquet-hadoop:1.15.2` to `1.17.0`
 
 ### Runtime Dependency Updates
 
 * Removed `commons-beanutils:commons-beanutils:1.11.0`
 
+### Test Dependency Updates
+
+* Removed `org.junit.jupiter:junit-jupiter-api:5.13.0`
+* Removed `org.junit.jupiter:junit-jupiter-params:5.13.0`
+* Added `org.junit.jupiter:junit-jupiter:6.0.3`
+* Updated `org.mockito:mockito-junit-jupiter:5.18.0` to `5.23.0`
+
 ### Plugin Dependency Updates
 
-* Updated `com.exasol:error-code-crawler-maven-plugin:2.0.3` to `2.0.4`
-* Updated `com.exasol:project-keeper-maven-plugin:5.1.0` to `5.2.3`
+* Updated `com.exasol:artifact-reference-checker-maven-plugin:0.4.3` to `0.4.4`
+* Updated `com.exasol:error-code-crawler-maven-plugin:2.0.3` to `2.0.7`
+* Updated `com.exasol:project-keeper-maven-plugin:5.1.0` to `5.6.1`
+* Updated `com.exasol:quality-summarizer-maven-plugin:0.2.0` to `0.2.1`
+* Updated `io.github.git-commit-id:git-commit-id-maven-plugin:9.0.1` to `10.0.0`
+* Updated `org.apache.maven.plugins:maven-artifact-plugin:3.6.0` to `3.6.1`
+* Updated `org.apache.maven.plugins:maven-assembly-plugin:3.7.1` to `3.8.0`
+* Updated `org.apache.maven.plugins:maven-clean-plugin:3.4.1` to `3.5.0`
+* Updated `org.apache.maven.plugins:maven-compiler-plugin:3.14.0` to `3.15.0`
+* Updated `org.apache.maven.plugins:maven-enforcer-plugin:3.5.0` to `3.6.2`
+* Updated `org.apache.maven.plugins:maven-failsafe-plugin:3.5.3` to `3.5.5`
+* Updated `org.apache.maven.plugins:maven-jar-plugin:3.4.2` to `3.5.0`
+* Updated `org.apache.maven.plugins:maven-resources-plugin:3.3.1` to `3.5.0`
+* Updated `org.apache.maven.plugins:maven-surefire-plugin:3.5.3` to `3.5.5`
+* Updated `org.codehaus.mojo:flatten-maven-plugin:1.7.0` to `1.7.3`
+* Updated `org.codehaus.mojo:versions-maven-plugin:2.18.0` to `2.21.0`
+* Updated `org.graalvm.buildtools:native-maven-plugin:0.10.6` to `1.1.0`
+* Updated `org.jacoco:jacoco-maven-plugin:0.8.13` to `0.8.14`
+* Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751` to `5.5.0.6356`

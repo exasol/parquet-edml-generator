@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.exasol</groupId>
     <artifactId>parquet-edml-generator</artifactId>
-    <version>1.1.15</version>
+    <version>2.0.0</version>
     <name>Parquet EDML Generator</name>
     <description>Tool that generates EDML definitions for Parquet files.</description>
     <url>https://github.com/exasol/parquet-edml-generator/</url>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <picocli.version>4.7.7</picocli.version>
         <sonar.organization>exasol</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -35,17 +35,17 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>error-reporting-java</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-hadoop</artifactId>
-            <version>1.15.2</version>
+            <version>1.17.0</version>
         </dependency>
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>edml-java</artifactId>
-            <version>2.1.0</version>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
             <groupId>info.picocli</groupId>
@@ -55,12 +55,12 @@
         <dependency>
             <groupId>com.exasol</groupId>
             <artifactId>maven-project-version-getter</artifactId>
-            <version>1.2.1</version>
+            <version>1.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
-            <version>3.4.1</version>
+            <version>3.5.0</version>
             <!-- Excluding transitive dependencies with vulnerabilities. -->
             <exclusions>
                 <!-- CVE-2023-2976 and CVE-2020-8908 -->
@@ -109,20 +109,14 @@
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.13.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.13.0</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>6.0.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.18.0</version>
+            <version>5.23.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -130,38 +124,52 @@
         <dependencies>
             <!-- Explicitly upgrade transitive dependency of hadoop-client to fix CVE-2025-48734 -->
             <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.11.0</version>
-            <scope>runtime</scope>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.11.0</version>
+                <scope>runtime</scope>
             </dependency>
             <!--Transitive dependency override for CVE-2025-53864, direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
             <dependency>
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>
-                <version>10.4.1</version>
+                <version>10.9</version>
                 <scope>compile</scope>
             </dependency>
             <!--Transitive dependency override for CVE-2025-53864, direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.13.1</version>
+                <version>2.14.0</version>
                 <scope>runtime</scope>
             </dependency>
             <!--Transitive dependency override for CVE-2025-49128 and CVE-2025-52999, direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.19.0</version>
+                <version>2.21.3</version>
                 <scope>runtime</scope>
             </dependency>
             <!--Transitive dependency override for CVE-2025-48924, direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.18.0</version>
+                <version>3.20.0</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <!-- Fix CVE-2026-0636, CVE-2026-5588, CVE-2026-5598 direct dependency: org.apache.hadoop:hadoop-client -->
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>1.84</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <!-- Fix CVE-2025-67721, direct dependency: org.apache.parquet:parquet-hadoop -->
+                 <groupId>io.airlift</groupId>
+                 <artifactId>aircompressor</artifactId>
+                 <version>2.0.3</version>
+                 <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -170,7 +178,7 @@
             <plugin>
                 <groupId>com.exasol</groupId>
                 <artifactId>project-keeper-maven-plugin</artifactId>
-                <version>5.2.3</version>
+                <version>5.6.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -211,7 +219,7 @@
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
-                <version>0.10.6</version>
+                <version>1.1.0</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -229,9 +237,9 @@
                     <quickBuild>false</quickBuild>
                     <imageName>${project.artifactId}</imageName>
                     <fallback>false</fallback>
-                    <buildArgs><!-- Optimize for size rather than speed -->
+                    <buildArgs>
+                        <!-- Optimize for size rather than speed -->
                         -O1
-                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
                     </buildArgs>
                 </configuration>
             </plugin>
@@ -257,7 +265,7 @@
     <parent>
         <artifactId>parquet-edml-generator-generated-parent</artifactId>
         <groupId>com.exasol</groupId>
-        <version>1.1.15</version>
+        <version>2.0.0</version>
         <relativePath>pk_generated_parent.pom</relativePath>
     </parent>
 </project>
