@@ -240,7 +240,6 @@
                     <buildArgs>
                         <!-- Optimize for size rather than speed -->
                         -O1
-                        -H:ReflectionConfigurationFiles=${project.basedir}/src/main/reflect-config.json
                     </buildArgs>
                 </configuration>
             </plugin>
