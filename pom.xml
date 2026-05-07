@@ -109,13 +109,7 @@
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>6.0.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>6.0.3</version>
             <scope>test</scope>
         </dependency>
@@ -162,6 +156,20 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.20.0</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <!-- Fix CVE-2026-0636, CVE-2026-5588, CVE-2026-5598 direct dependency: org.apache.hadoop:hadoop-client -->
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>1.84</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <!-- Fix CVE-2025-67721, direct dependency: org.apache.parquet:parquet-hadoop -->
+                 <groupId>io.airlift</groupId>
+                 <artifactId>aircompressor</artifactId>
+                 <version>2.0.3</version>
+                 <scope>runtime</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

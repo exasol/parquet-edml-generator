@@ -14,12 +14,11 @@
 
 ## Test Dependencies
 
-| Dependency                  | License                           |
-| --------------------------- | --------------------------------- |
-| [Hamcrest][10]              | [BSD-3-Clause][11]                |
-| [JUnit Jupiter API][12]     | [Eclipse Public License v2.0][13] |
-| [JUnit Jupiter Params][12]  | [Eclipse Public License v2.0][13] |
-| [mockito-junit-jupiter][14] | [MIT][15]                         |
+| Dependency                       | License                           |
+| -------------------------------- | --------------------------------- |
+| [Hamcrest][10]                   | [BSD-3-Clause][11]                |
+| [JUnit Jupiter (Aggregator)][12] | [Eclipse Public License v2.0][13] |
+| [mockito-junit-jupiter][14]      | [MIT][15]                         |
 
 ## Plugin Dependencies
 

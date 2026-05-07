@@ -8,6 +8,9 @@ Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52
 
 This release fixes the following vulnerabilities:
 
+* CVE-2026-0636, CVE-2026-5588, CVE-2026-5598 in `org.bouncycastle:bcprov-jdk18on`
+* CVE-2025-67721 in `io.airlift:aircompressor`
+
 ### CVE-2025-53864 (CWE-121) in dependency `com.google.code.gson:gson:jar:2.9.0:compile`
 
 Connect2id Nimbus JOSE + JWT before 10.0.2 allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion. NOTE: this is independent of the Gson 2.11.0 issue because the Connect2id product could have checked the JSON object nesting depth, regardless of what limits (if any) were imposed by Gson.
@@ -105,8 +108,9 @@ CWE: CWE-209
 
 ### Test Dependency Updates
 
-* Updated `org.junit.jupiter:junit-jupiter-api:5.13.0` to `6.0.3`
-* Updated `org.junit.jupiter:junit-jupiter-params:5.13.0` to `6.0.3`
+* Removed `org.junit.jupiter:junit-jupiter-api:5.13.0`
+* Removed `org.junit.jupiter:junit-jupiter-params:5.13.0`
+* Added `org.junit.jupiter:junit-jupiter:6.0.3`
 * Updated `org.mockito:mockito-junit-jupiter:5.18.0` to `5.23.0`
 
 ### Plugin Dependency Updates
