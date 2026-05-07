@@ -4,7 +4,7 @@ Code name: Fixes for vulnerabilities CVE-2025-48924, CVE-2025-49128, CVE-2025-52
 
 ## Summary
 
-**Breaking Change:** Starting with this release, the Parquet EDML Generator requires Java 21 to run.
+**Breaking Change:** Starting with this release, the Parquet EDML Generator requires Java 21 to run. The native binary is now built with GraalVM 25.
 
 This release fixes the following vulnerabilities:
 
