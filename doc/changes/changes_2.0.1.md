@@ -28,6 +28,7 @@ Users are recommended to upgrade to version 2.15.0, which fixes the issue.
 
 ### Compile Dependency Updates
 
+* Added `org.apache.commons:commons-configuration2:2.15.1`
 * Updated `org.apache.parquet:parquet-hadoop:1.17.0` to `1.17.1`
 
 ### Test Dependency Updates
