@@ -1,4 +1,4 @@
-# Parquet EDML Generator 2.0.1, released 2026-??-??
+# Parquet EDML Generator 2.0.1, released 2026-06-11
 
 Code name: Fixed vulnerability CVE-2026-45205 in org.apache.commons:commons-configuration2:jar:2.10.1:compile
 
@@ -7,6 +7,7 @@ Code name: Fixed vulnerability CVE-2026-45205 in org.apache.commons:commons-conf
 This release fixes the following vulnerability:
 
 ### CVE-2026-45205 (CWE-674) in dependency `org.apache.commons:commons-configuration2:jar:2.10.1:compile`
+
 Uncontrolled Recursion vulnerability in Apache Commons.
 
 When processing an untrusted configuration file, Commons Configuration will throw a StackOverflowError for YAML input with cycles.
@@ -36,3 +37,4 @@ Users are recommended to upgrade to version 2.15.0, which fixes the issue.
 ### Plugin Dependency Updates
 
 * Updated `com.exasol:project-keeper-maven-plugin:5.6.1` to `5.6.2`
+* Updated `org.graalvm.buildtools:native-maven-plugin:1.1.0` to `1.1.2`
