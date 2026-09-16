@@ -1,10 +1,10 @@
 # Parquet EDML Generator 2.0.3, released 2026-09-16
 
-Code name: Fixed vulnerabilities GHSA-R7WM-3CXJ-WFF9, GHSA-r7wm-3cxj-wff9
+Code name: Fixed vulnerabilities GHSA-R7WM-3CXJ-WFF9, GHSA-r7wm-3cxj-wff9, CVE-2026-8763, CVE-2026-59651, CVE-2026-59650, CVE-2026-59638, CVE-2026-58063, CVE-2026-58062, CVE-2026-58060, CVE-2026-58059, CVE-2026-14682, CVE-2026-13586, CVE-2026-13506, CVE-2026-12860, CVE-2026-12816, CVE-2026-12803
 
 ## Summary
 
-This release fixes the following 2 vulnerabilities:
+This release fixes the following 16 vulnerabilities:
 
 ### GHSA-R7WM-3CXJ-WFF9 (CWE-770) in dependency `com.fasterxml.jackson.core:jackson-core:jar:unknown:compile`
 jackson-core: Async parser maxNumberLength bypass via chunked digit accumulation (incomplete fix for GHSA-72hv-8253-57qq)
@@ -30,6 +30,21 @@ jackson-core: Async parser maxNumberLength bypass via chunked digit accumulation
 
 * #98: Fixed vulnerability GHSA-R7WM-3CXJ-WFF9 in dependency `com.fasterxml.jackson.core:jackson-core:jar:unknown:compile`
 * #98: Fixed vulnerability GHSA-R7WM-3CXJ-WFF9 in dependency `com.fasterxml.jackson.core:jackson-core:jar:2.22.0:compile`
+* #114: Fixed vulnerability CVE-2026-8763 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #113: Fixed vulnerability CVE-2026-59651 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #112: Fixed vulnerability CVE-2026-59650 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #111: Fixed vulnerability CVE-2026-59638 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #110: Fixed vulnerability CVE-2026-58063 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #109: Fixed vulnerability CVE-2026-58062 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #108: Fixed vulnerability CVE-2026-58060 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #107: Fixed vulnerability CVE-2026-58059 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #106: Fixed vulnerability CVE-2026-14682 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #105: Fixed vulnerability CVE-2026-13586 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #104: Fixed vulnerability CVE-2026-13506 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #103: Fixed vulnerability CVE-2026-12860 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #102: Fixed vulnerability CVE-2026-12816 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+* #101: Fixed vulnerability CVE-2026-12803 in dependency `org.bouncycastle:bcprov-jdk18on:jar:1.84:runtime`
+
 ## Dependency Updates
 
 ### Compile Dependency Updates
