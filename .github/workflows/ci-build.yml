@@ -146,11 +146,34 @@ jobs:
               -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \
               -DossindexSkip=true
 
+  lint-github-actions:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+    concurrency:
+      group: '${{ github.workflow }}-github-actions-linter-${{ github.ref }}'
+      cancel-in-progress: true
+    steps:
+      - name: Checkout the repository
+        id: checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Lint GitHub actions with Zizmor
+        id: lint-github-actions
+        uses: zizmorcore/zizmor-action@cc914d7f3750a2d13d75c7f184a1060aa0e9d482 # v0.6.4
+        with:
+          advanced-security: false
+
   build:
     needs:
       - matrix-build
       - ossindex
       - next-java-compatibility
+      - lint-github-actions
     runs-on: ubuntu-slim
     defaults:
       run:
