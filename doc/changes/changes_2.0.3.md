@@ -1,10 +1,10 @@
 # Parquet EDML Generator 2.0.3, released 2026-09-16
 
-Code name: Fixed vulnerabilities GHSA-R7WM-3CXJ-WFF9, GHSA-r7wm-3cxj-wff9, CVE-2026-8763, CVE-2026-59651, CVE-2026-59650, CVE-2026-59638, CVE-2026-58063, CVE-2026-58062, CVE-2026-58060, CVE-2026-58059, CVE-2026-14682, CVE-2026-13586, CVE-2026-13506, CVE-2026-12860, CVE-2026-12816, CVE-2026-12803
+Code name: Fixed vulnerabilities GHSA-R7WM-3CXJ-WFF9, GHSA-r7wm-3cxj-wff9, CVE-2026-8763, CVE-2026-59651, CVE-2026-59650, CVE-2026-59638, CVE-2026-58063, CVE-2026-58062, CVE-2026-58060, CVE-2026-58059, CVE-2026-14682, CVE-2026-13586, CVE-2026-13506, CVE-2026-12860, CVE-2026-12816, CVE-2026-12803, CVE-2026-90559
 
 ## Summary
 
-This release fixes the following 16 vulnerabilities:
+This release fixes the following vulnerabilities:
 
 ### GHSA-R7WM-3CXJ-WFF9 (CWE-770) in dependency `com.fasterxml.jackson.core:jackson-core:jar:unknown:compile`
 jackson-core: Async parser maxNumberLength bypass via chunked digit accumulation (incomplete fix for GHSA-72hv-8253-57qq)
@@ -25,6 +25,23 @@ jackson-core: Async parser maxNumberLength bypass via chunked digit accumulation
 * https://github.com/FasterXML/jackson-core/commit/4cdd529749da396cc7edf6d4a2aad41d47902641
 * https://github.com/FasterXML/jackson-core/commit/c5941e5aae7fd5aeac55d66933cfb82b9aabeef8
 * https://github.com/FasterXML/jackson-core
+
+### CVE-2026-90559 in transitive dependency `org.xerial.snappy:snappy-java:1.1.10.12`
+
+### CVE-2026-77711 in dependency `maven:org.eclipse.jetty:jetty-client:9.4.58.v20250814`
+
+When Jetty's "HttpClient" make a request to a server through a forward proxy, the server may reply with a 407 (Proxy Authentication Required).
+The client mistakenly interprets the 407 as coming from the proxy, so it re-sends the request with the "Proxy-Authentication" header, which arrives to the server, that now has access to the proxy credentials.
+
+### CVE-2026-76184 in dependency `maven:org.eclipse.jetty:jetty-client:9.4.58.v20250814`
+
+In Eclipse Jetty, HttpClient may receive a redirect of the form:
+If an attacker is able to control the redirects, then HttpClient matches authentication credentials against "/secure" rather than normalizing the path to "/evil", and will therefore follow the redirect sending the "Authorization" header for "/secure" to "/evil".
+This also mean that the attacker must have an evil application deployed on the same domain as the target.
+
+### CVE-2023-50572 in dependency `maven:org.jline:jline:3.9.0`
+
+An issue in the component GroovyEngine.execute of jline-groovy v3.24.1 allows attackers to cause an OOM (OutofMemory) error.
 
 ## Security
 
