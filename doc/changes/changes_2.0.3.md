@@ -87,5 +87,5 @@ An issue in the component GroovyEngine.execute of jline-groovy v3.24.1 allows at
 * Updated `org.apache.maven.plugins:maven-toolchains-plugin:3.2.0` to `3.3.0`
 * Updated `org.codehaus.mojo:flatten-maven-plugin:1.7.3` to `1.8.0`
 * Updated `org.codehaus.mojo:versions-maven-plugin:2.21.0` to `2.23.0`
-* Updated `org.graalvm.buildtools:native-maven-plugin:1.1.2` to `1.1.13`
+* Updated `org.graalvm.buildtools:native-maven-plugin:1.1.2` to `1.1.14`
 * Updated `org.sonarsource.scanner.maven:sonar-maven-plugin:5.7.0.6970` to `5.8.0.7211`
