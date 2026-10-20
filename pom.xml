@@ -92,6 +92,11 @@
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-security</artifactId>
                 </exclusion>
+                <!-- hadoop-yarn-client's interactive command-line support is not used. -->
+                <exclusion>
+                    <groupId>org.jline</groupId>
+                    <artifactId>jline</artifactId>
+                </exclusion>
                 <!-- CVE-2023-39410 -->
                 <exclusion>
                     <groupId>org.apache.avro</groupId>
@@ -289,16 +294,6 @@
                     <failBuildInCaseOfEqualContentConflict>false</failBuildInCaseOfEqualContentConflict>
                     <failBuildInCaseOfConflict>false</failBuildInCaseOfConflict>
                     <printEqualFiles>false</printEqualFiles>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.ossindex.maven</groupId>
-                <artifactId>ossindex-maven-plugin</artifactId>
-                <configuration>
-                    <!-- OSS Index exclusion for CVE-2026-10050 in org.eclipse.jetty:jetty-security; no CVE-free upgrade was found after trying no downloadable newer version -->
-                    <excludeVulnerabilityIds>
-                        <exclude>CVE-2026-10050</exclude>
-                    </excludeVulnerabilityIds>
                 </configuration>
             </plugin>
         </plugins>
