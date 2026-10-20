@@ -177,7 +177,7 @@
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>2.22.4</version>
-                <type>pom</type>
+                <type>bom</type>
                 <scope>import</scope>
             </dependency>
             <!--Transitive dependency override for CVE-2025-48924, direct dependency: org.apache.hadoop:hadoop-client:3.4.1:compile-->
