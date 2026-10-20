@@ -87,6 +87,11 @@
                     <groupId>org.eclipse.jetty.websocket</groupId>
                     <artifactId>websocket-client</artifactId>
                 </exclusion>
+                <!-- hadoop-common's embedded servlet support is not used. Exclude its vulnerable Jetty security dependency. -->
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-security</artifactId>
+                </exclusion>
                 <!-- CVE-2023-39410 -->
                 <exclusion>
                     <groupId>org.apache.avro</groupId>
