@@ -82,6 +82,11 @@
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-http</artifactId>
                 </exclusion>
+                <!-- hadoop-yarn-client's WebSocket support is not used. Exclude it and its vulnerable Jetty client dependencies. -->
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>websocket-client</artifactId>
+                </exclusion>
                 <!-- CVE-2023-39410 -->
                 <exclusion>
                     <groupId>org.apache.avro</groupId>
