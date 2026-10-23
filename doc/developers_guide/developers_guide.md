@@ -14,5 +14,6 @@ Building the native image is quite resource expensive (~4GB RAM, 2 min CPU). If 
 
 ## Release process
 
-This project needs a manual release with release-droid.
+<!-- [dman->dsn~manual-release-packaging~1] -->
 
+This project needs a manual release with release-droid.

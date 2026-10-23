@@ -40,6 +40,7 @@ class LogicalTypeConverterTest {
 
     @ParameterizedTest
     @MethodSource("getUnsupportedTypes")
+    // [utest->dsn~reject-type-runtime~1]
     void testUnsupported(final Type unsupportedType) {
         final LogicalTypeConverter converter = new LogicalTypeConverter();
         final LogicalTypeAnnotation logicalTypeAnnotation = unsupportedType.getLogicalTypeAnnotation();
@@ -82,6 +83,7 @@ class LogicalTypeConverterTest {
 
     @ParameterizedTest
     @MethodSource("testConvertToStringCases")
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertToString(final LogicalTypeAnnotation annotation) {
         final ToVarcharMapping toVarcharMapping = (ToVarcharMapping) new LogicalTypeConverter().convert(annotation,
                 "my_string");
@@ -92,16 +94,19 @@ class LogicalTypeConverterTest {
     }
 
     @Test
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertLogicalTypeDecimal() {
         assertConvertsToToDecimalMapping(LogicalTypeAnnotation.decimalType(2, 8), 2, 8);
     }
 
     @Test
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertLogicalTypeInt() {
         assertConvertsToToDecimalMapping(LogicalTypeAnnotation.intType(8, true), 0, 3);
     }
 
     @Test
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertLogicalTypeDate() {
         final MappingDefinition result = new LogicalTypeConverter().convert(LogicalTypeAnnotation.dateType(),
                 ",birthday");
@@ -109,12 +114,14 @@ class LogicalTypeConverterTest {
     }
 
     @Test
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertLogicalTypeTime() {
         assertConvertsToToDecimalMapping(LogicalTypeAnnotation.timeType(true, LogicalTypeAnnotation.TimeUnit.MILLIS), 0,
                 20);
     }
 
     @Test
+    // [utest->dsn~convert-logical-schema-fields~1]
     void testConvertLogicalTypeTimestamp() {
         final ToTimestampMapping toTimestampMapping = (ToTimestampMapping) new LogicalTypeConverter().convert(
                 LogicalTypeAnnotation.timestampType(true, LogicalTypeAnnotation.TimeUnit.MILLIS), "my_timestamp");

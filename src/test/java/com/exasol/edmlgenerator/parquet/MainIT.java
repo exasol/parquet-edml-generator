@@ -20,6 +20,7 @@ class MainIT {
     private static final Logger LOGGER = Logger.getLogger(MainIT.class.getSimpleName());
 
     @Test
+    // [itest->dsn~generate-definition-runtime~1]
     void testGenerateDefinitionWithJar(@TempDir final Path tempDir) throws IOException, InterruptedException {
         final Path parquetFile = tempDir.resolve("test.parquet");
         final ParquetTestFixture fixture = new ParquetTestFixture(parquetFile);
@@ -29,6 +30,7 @@ class MainIT {
 
     @Test
     @Tag("native-image")
+    // [itest->dsn~generate-definition-runtime~1]
     void testGenerateDefinitionWithNativeImage(@TempDir final Path tempDir) throws IOException, InterruptedException {
         final Path parquetFile = tempDir.resolve("test.parquet");
         final ParquetTestFixture fixture = new ParquetTestFixture(parquetFile);

@@ -23,6 +23,7 @@ public class ParquetEdmlGenerator {
      * @param parquetFile parquet file to generate mapping for
      * @return generated mapping definition
      */
+    // [impl->dsn~generate-definition-runtime~1]
     public EdmlDefinition generateEdmlDefinition(final Path parquetFile) {
         final MessageType schema = getSchema(parquetFile);
         final String fileName = parquetFile.toFile().getName();

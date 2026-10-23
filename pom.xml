@@ -256,6 +256,7 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
+            <!-- [bld->dsn~documented-runtime-distributions~1] -->
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
