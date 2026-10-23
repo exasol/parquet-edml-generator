@@ -23,6 +23,9 @@ public class ParquetColumnToMappingDefinitionConverter {
      * @param column column to create definition for
      * @return generated mapping definition
      */
+    // [impl->dsn~convert-primitive-schema-fields~1]
+    // [impl->dsn~convert-logical-schema-fields~1]
+    // [impl->dsn~preserve-nested-schema-fields~1]
     public MappingDefinition convert(final Type column) {
         final LogicalTypeAnnotation logicalTypeAnnotation = column.getLogicalTypeAnnotation();
         if (logicalTypeAnnotation != null) {
@@ -76,8 +79,7 @@ public class ParquetColumnToMappingDefinitionConverter {
             case FIXED_LEN_BYTE_ARRAY:
                 return ToVarcharMapping.builder().destinationName(buildColumnName(primitiveType))
                         .varcharColumnSize(primitiveType.getTypeLength()).build();
-            case FLOAT:
-            case DOUBLE:
+            case FLOAT, DOUBLE:
                 return ToDoubleMapping.builder().destinationName(buildColumnName(primitiveType)).build();
             default:
                 throw createUnsupportedTypeException(primitiveTypeName + "-primitive-type",

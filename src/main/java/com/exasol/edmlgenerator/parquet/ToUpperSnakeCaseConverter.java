@@ -14,6 +14,7 @@ public class ToUpperSnakeCaseConverter {
      * @param inputString input string in camelCase, lower_snake_case or UPPER_SNAKE_CASE.
      * @return string formatted in UPPER_SNAKE_CASE
      */
+    // [impl->dsn~normalize-destination-field-names~1]
     public static String toUpperSnakeCase(final String inputString) {
         boolean isPreviousUpperOrUnderscore = false;
         boolean isFirst = true;

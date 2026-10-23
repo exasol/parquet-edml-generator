@@ -18,6 +18,7 @@ class UnsupportedTypeExceptionBuilder {
      * @param columnName name of the column
      * @return build exception
      */
+    // [impl->dsn~reject-type-runtime~1]
     static UnsupportedOperationException createUnsupportedTypeException(final String typeName,
             final String columnName) {
         return new UnsupportedOperationException(ExaError.messageBuilder("E-PEG-2")

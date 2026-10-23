@@ -15,6 +15,7 @@ class ToUpperSnakeCaseConverterTest {
             "myCSV, MY_CSV", //
             "my_table, MY_TABLE", //
             "MY_TABLE, MY_TABLE" })
+    // [utest->dsn~normalize-destination-field-names~1]
     void testConversion(final String input, final String expected) {
         assertThat(ToUpperSnakeCaseConverter.toUpperSnakeCase(input), Matchers.equalTo(expected));
     }

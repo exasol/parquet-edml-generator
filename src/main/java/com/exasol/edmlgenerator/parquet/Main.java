@@ -29,6 +29,9 @@ public class Main implements Callable<Integer> {
 
     @Override
     @SuppressWarnings("java:S106") // we really want to print to stdout here
+    // [impl->dsn~cli-entry-point~1]
+    // [impl->dsn~generate-definition-runtime~1]
+    // [impl->dsn~local-cli-processing~1]
     public Integer call() throws Exception {
         final EdmlDefinition edmlDefinition = new ParquetEdmlGenerator().generateEdmlDefinition(this.parquetFile);
         System.out.println(new EdmlSerializer().serialize(edmlDefinition));

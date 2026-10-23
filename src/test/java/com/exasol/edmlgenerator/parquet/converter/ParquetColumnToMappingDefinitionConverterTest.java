@@ -19,6 +19,7 @@ class ParquetColumnToMappingDefinitionConverterTest {
     @ParameterizedTest
     @CsvSource({ //
             "INT32, 10", "INT64, 20" })
+    // [utest->dsn~convert-primitive-schema-fields~1]
     void testConvertIntType(final PrimitiveType.PrimitiveTypeName type, final int expectedPrecision) {
         final PrimitiveType intType = Types.primitive(type, REQUIRED).named("id");
         assertConvertsToToDecimalMapping(intType, 0, expectedPrecision, "ID");
@@ -89,6 +90,7 @@ class ParquetColumnToMappingDefinitionConverterTest {
     }
 
     @Test
+    // [utest->dsn~preserve-nested-schema-fields~1]
     void testConvertNestedList() {
         final Type itemType = Types.primitive(INT32, REQUIRED).named("element");
         final GroupType listType = Types.list(REQUIRED).element(itemType).named("ids");
